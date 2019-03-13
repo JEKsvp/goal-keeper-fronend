@@ -1,35 +1,19 @@
 <template id="main-page">
-  <v-ons-page>
-    <v-ons-toolbar>
-      <div class="center">Title</div>
-    </v-ons-toolbar>
-
-    <p style="text-align: center">
-      <v-ons-button @click="$ons.notification.alert('Hello World!')">
-        Click me!
-      </v-ons-button>
-    </p>
-  </v-ons-page>
+  <v-app>
+    <v-container>
+        <v-layout align-center>
+            <v-btn color="success">Success</v-btn>
+        </v-layout>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
+    export default {
+        name: 'app',
+    }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
