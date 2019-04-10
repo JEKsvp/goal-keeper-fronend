@@ -4,7 +4,8 @@ module.exports = {
     devServer: {
         proxy: {
             '/': {
-                target: 'http://localhost:5000'
+                ws: false,
+                target: 'http://localhost:8081'
             }
         }
     }
