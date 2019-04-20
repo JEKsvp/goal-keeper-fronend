@@ -29,6 +29,7 @@
 
     import Logo from '../Logo';
     import LoginService from '../../service/LoginService';
+    import UserService from '../../service/UserService'
 
     export default {
         components: {Logo},
@@ -46,7 +47,12 @@
                 try {
                     this.validate(this.loginForm);
                     let data = await LoginService.login(this.loginForm);
-                    console.log(data);
+                    this.$session.set('token', data.accessToken);
+
+                    let username = this.loginForm.username;
+                    let user = await UserService.getUser(username);
+                    this.$store.commit('login', user);
+                    this.$router.push({name: 'user', params: {username: username}})
                 } catch (e) {
                     console.log(e)
                 }

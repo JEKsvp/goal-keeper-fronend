@@ -9,7 +9,7 @@ const Store = new Vuex.Store({
     },
     mutations: {
         login(user) {
-            state.user = user;
+            this.state.user = user;
         }
     }
 });

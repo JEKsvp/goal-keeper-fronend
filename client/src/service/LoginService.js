@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const url = "login";
-
 class LoginService {
 
     static login(loginForm) {
@@ -11,7 +9,23 @@ class LoginService {
                     username: loginForm.username,
                     password: loginForm.password
                 };
-                const response = await axios.post(url, requestBody);
+                const response = await axios.post('login', requestBody);
+                const data = response.data;
+                resolve(data);
+            } catch (err) {
+                reject(err);
+            }
+        })
+    }
+
+    static refreshToken(username, token) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let requestBody = {
+                    username: username,
+                    accessToken: token
+                };
+                const response = await axios.post('refreshToken', requestBody);
                 const data = response.data;
                 resolve(data);
             } catch (err) {

@@ -2,15 +2,15 @@ import axios from 'axios';
 
 const url = "api/v1/users";
 
-class UserService{
+class UserService {
 
-    static getUsers(){
-        return new Promise(async (resolve, reject) =>{
-            try{
-                const response = await axios.get(url);
+    static getUser(username) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await axios.get(`${url}/${username}`);
                 const data = response.data;
                 resolve(data);
-            }catch(err){
+            } catch (err) {
                 reject(err);
             }
         })
