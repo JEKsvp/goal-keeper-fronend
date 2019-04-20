@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const url = "api/v1/users"
+const url = "api/v1/users";
 
 class UserService{
 
     static getUsers(){
-        return new Promice(async (resolve, reject) =>{
+        return new Promise(async (resolve, reject) =>{
             try{
                 const response = await axios.get(url);
                 const data = response.data;
@@ -16,3 +16,5 @@ class UserService{
         })
     }
 }
+
+export default UserService;

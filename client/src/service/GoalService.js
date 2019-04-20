@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "api/v1/goals"
+const url = "api/v1/goals";
 
 class GoalService{
 

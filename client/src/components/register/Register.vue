@@ -32,7 +32,7 @@
                     </v-text-field>
                 </v-flex>
                 <v-flex>
-                    <v-btn color="success" @on-click="doRegistration">Зарегистрироваться</v-btn>
+                    <v-btn color="success" @click="doRegistration">Зарегистрироваться</v-btn>
                 </v-flex>
             </v-layout>
         </v-container>
@@ -40,7 +40,9 @@
 </template>
 
 <script>
+
     import Logo from "../Logo";
+    import RegistrationService from "../../service/RegistrationService"
 
     export default {
         components: {Logo},
@@ -54,77 +56,80 @@
                 },
                 passwordAgain: '',
                 loginRules: [
-                    v => validateUsername(v)
+                    v => this.validateUsername(v)
                 ],
                 emailRules: [
-                    v => validateEmail(v)
+                    v => this.validateEmail(v)
                 ],
                 passwordRules: [
-                    v => validatePassword(v)
+                    v => this.validatePassword(v)
                 ],
                 passwordAgainRules: [
-                    v => validatePasswordAgain(this.register.password, v)
+                    v => this.validatePasswordAgain(this.register.password, v)
                 ]
             }
         },
 
         methods: {
-            doRegistration() {
+            async doRegistration() {
                 try {
-                    validate(this.register, this.passwordAgain)
+                    this.validate(this.register, this.passwordAgain);
+                    await RegistrationService.registerUser(this.register);
+                    this.$router.push({path: 'login'})
                 } catch (err) {
                     console.log(err)
                 }
+            },
+
+            validate(register, passwordAgain) {
+                let validations = [
+                    this.validateUsername(register.username),
+                    this.validateEmail(register.email),
+                    this.validatePassword(register.password),
+                    this.validatePasswordAgain(register.password, passwordAgain)
+                ];
+                for (let valid in validations) {
+                    if (valid instanceof String) {
+                        throw valid;
+                    }
+                }
+            },
+
+            validateUsername(username) {
+                if (!username) {
+                    return 'Логин не может быть пустым'
+                } else if (username.length > 20) {
+                    return 'Логин должен содержать не более 20 символов'
+                }
+                return true;
+            },
+
+            validateEmail(email) {
+                if (!email) {
+                    return 'E-mail не может быть пустым';
+                } else if (!/.+@.+/.test(email)) {
+                    return 'Неправильный формат E-mail';
+                }
+                return true;
+            },
+
+            validatePassword(password) {
+                if (!password) {
+                    return 'Пароль не может быть пустым';
+                } else if (password.length < 6) {
+                    return 'Пароль должен содержать не менее 6 символов';
+                } else if (password.length > 30) {
+                    return 'Пароль должен содержать не более 30 символов';
+                }
+                return true;
+            },
+
+            validatePasswordAgain(password, passwordAgain) {
+                if (password !== passwordAgain) {
+                    return 'Пароли не совпадают';
+                }
+                return true;
             }
         }
-    }
-
-    function validate(register, passwordAgain) {
-        let validations = [];
-        validations.push(validateUsername(register.username));
-        validations.push(validateEmail(register.email));
-        validations.push(validatePassword(register.password));
-        validations.push(validatePasswordAgain(register.password, passwordAgain));
-        for (let valid in validations) {
-            if(valid instanceof String){
-                throw valid;
-            }
-        }
-    }
-
-    function validateUsername(username) {
-        if (!username) {
-            return 'Логин не может быть пустым'
-        } else if (username.length > 10) {
-            return 'Логин должен содержать не более 10 символов'
-        }
-        return true;
-    }
-
-    function validateEmail(email) {
-        if (!email) {
-            return 'E-mail не может быть пустым';
-        } else if (!/.+@.+/.test(email)) {
-            return 'Неправильный формат E-mail';
-        }
-        return true;
-    }
-
-    function validatePassword(password) {
-        if (!password) {
-            return 'Пароль не может быть пустым';
-        } else if (password.length < 6) {
-            return 'Пароль должен содержать не менее 6 символов';
-        } else if (password.length > 30) {
-            return 'Пароль должен содержать не более 30 символов';
-        }
-        return true;
-    }
-
-    function validatePasswordAgain(password, passwordAgain) {
-        if(password !== passwordAgain){
-            return 'Пароли не совпадают';
-        }
-        return true;
     }
 </script>
