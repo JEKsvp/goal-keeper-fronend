@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const proxy = require('http-proxy-middleware');
-const backendUrl = require('./BackendUrl')
+const backendUrl = require('./BackendUrl');
 
 
 const app = express();

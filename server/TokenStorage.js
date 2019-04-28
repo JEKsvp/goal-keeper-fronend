@@ -1,16 +1,16 @@
 var userTokenMap = new Map();
 
 var TokenStorage = {
-    put(username, tokens) {
-        userTokenMap.set(username, tokens);
+    put(accessToken, refreshToken) {
+        userTokenMap.set(accessToken, refreshToken);
     },
 
-    get(username) {
-        return userTokenMap.get(username);
+    get(accessToken) {
+        return userTokenMap.get(accessToken);
     },
 
-    remove(username) {
-        userTokenMap.delete(username);
+    remove(accessToken) {
+        userTokenMap.delete(accessToken);
     },
 };
 

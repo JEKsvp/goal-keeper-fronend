@@ -4,15 +4,19 @@
             <v-layout align-center justify-center column mt-5>
                 <logo></logo>
                 <v-flex pt-5 mt-2>
-                    <v-text-field
-                            v-model="loginForm.username"
-                            label="Логин">
-                    </v-text-field>
-                    <v-text-field
-                            v-model="loginForm.password"
-                            label="Пароль"
-                            type="password">
-                    </v-text-field>
+                    <v-form ref="loginForm"
+                            v-model="valid"
+                            lazy-validation>
+                        <v-text-field
+                                v-model="loginForm.username"
+                                label="Username">
+                        </v-text-field>
+                        <v-text-field
+                                v-model="loginForm.password"
+                                label="Password"
+                                type="password">
+                        </v-text-field>
+                    </v-form>
                 </v-flex>
                 <v-flex pb-0 mb-0>
                     <v-btn color="success" @click="doLogin">Войти</v-btn>
@@ -39,32 +43,40 @@
                 loginForm: {
                     username: '',
                     password: ''
-                }
+                },
+                valid: true,
+                invalidAuth: false
             }
         },
         methods: {
             async doLogin() {
-                try {
-                    this.validate(this.loginForm);
-                    let data = await LoginService.login(this.loginForm);
-                    this.$session.set('token', data.accessToken);
-
-                    let username = this.loginForm.username;
-                    let user = await UserService.getUser(username);
-                    this.$store.commit('login', user);
-                    this.$router.push({name: 'user', params: {username: username}})
-                } catch (e) {
-                    console.log(e)
+                let data = await this.sendLoginForm();
+                if (data) {
+                    try {
+                        this.loadUserContext(data.accessToken);
+                        this.$router.push({name: 'user', params: {username: this.loginForm.username}})
+                    } catch (e) {
+                        console.log(e)
+                    }
                 }
             },
-            validate(loginForm) {
-                if (!loginForm.username) {
-                    throw "Логин не может быть пустым";
+
+            async sendLoginForm() {
+                try {
+                    return await LoginService.login(this.loginForm);
+                } catch (err) {
+                    if (err.response.status === 400) {
+                        this.$showSnackbar('error', 'Invalid username or password');
+                    }
                 }
-                if (!loginForm.password) {
-                    throw "Пароль не может быть пустым";
-                }
-            }
+            },
+
+            async loadUserContext(accessToken) {
+                this.$session.set('token', accessToken);
+                let username = this.loginForm.username;
+                let user = await UserService.getUser(username);
+                this.$store.commit('login', user);
+            },
         }
     };
 </script>

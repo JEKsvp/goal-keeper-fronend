@@ -1,25 +1,33 @@
 var router = require('express').Router();
 const axios = require('axios');
 const qs = require('qs');
+
+const ErrorDto = require('./dto/ErrorDto');
 const TokenStorage = require('../TokenStorage');
 const backendUrl = require('../BackendUrl');
+
+const headers = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Authorization': 'Basic Y2xpZW50aWQ6c2VjcmV0'
+};
 
 router.post('/login', async (request, response) => {
     try {
         let tokenResponse = await getTokenByLogin(request.body.username, request.body.password);
-        TokenStorage.put(request.body.username, tokenResponse.data);
+        TokenStorage.put(tokenResponse.data.access_token, tokenResponse.data.refresh_token);
         response.json({accessToken: tokenResponse.data.access_token});
     } catch (e) {
-        console.error(e);
-        response.status(500).end();
+        if (e.response.status === 400) {
+            response.status(400)
+                .json({message: 'invalid login or password'})
+        } else {
+            response.status(500)
+                .json(ErrorDto.internalServerError());
+        }
     }
 });
 
 async function getTokenByLogin(username, password) {
-    const headers = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic Y2xpZW50aWQ6c2VjcmV0'
-    };
     const requestBody = {
         'grant_type': 'password',
         'username': username,
@@ -29,28 +37,26 @@ async function getTokenByLogin(username, password) {
 }
 
 router.post('/refreshToken', async (request, response) => {
-    let username = request.body.username;
     let accessToken = request.body.accessToken;
-    let tokens = TokenStorage.get(username);
-    if (tokens && tokens.access_token === accessToken) {
+    let refreshToken = TokenStorage.get(accessToken);
+    if (refreshToken) {
         try {
-            let tokenResponse = await getTokenByRefreshToken(username, tokens.refresh_token);
-            TokenStorage.put(request.body.username, tokenResponse.data);
+            let tokenResponse = await getTokenByRefreshToken(refreshToken);
+            TokenStorage.remove(accessToken);
+            TokenStorage.put(tokenResponse.data.access_token, tokenResponse.data.refresh_token);
             response.json({accessToken: tokenResponse.data.access_token});
         } catch (e) {
             console.error(e);
-            response.status(500).end();
+            response.status(500)
+                .end(ErrorDto.internalServerError());
         }
     } else {
-        response.status(401).send('Unauthorized');
+        response.status(401)
+            .json(new ErrorDto('Unauthorized'));
     }
 });
 
-async function getTokenByRefreshToken(username, refreshToken) {
-    const headers = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic Y2xpZW50aWQ6c2VjcmV0'
-    };
+async function getTokenByRefreshToken(refreshToken) {
     const requestBody = {
         'grant_type': 'refresh_token',
         'refresh_token': refreshToken

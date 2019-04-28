@@ -1,12 +1,12 @@
 <template>
-    <v-form>
+    <v-form ref="registrationForm">
         <v-container fill-height>
             <v-layout align-center justify-center column mt-5>
                 <logo></logo>
                 <v-flex pt-5 mt-2>
                     <v-text-field
                             validate-on-blur
-                            label="Логин"
+                            label="Username"
                             v-model="register.username"
                             :rules="loginRules">
                     </v-text-field>
@@ -19,14 +19,14 @@
                     <v-text-field
                             type="password"
                             validate-on-blur
-                            label="Пароль"
+                            label="password"
                             v-model="register.password"
                             :rules="passwordRules">
                     </v-text-field>
                     <v-text-field
                             type="password"
                             validate-on-blur
-                            label="Пароль повторно"
+                            label="password again"
                             v-model="passwordAgain"
                             :rules="passwordAgainRules">
                     </v-text-field>
@@ -72,12 +72,15 @@
 
         methods: {
             async doRegistration() {
-                try {
-                    this.validate(this.register, this.passwordAgain);
-                    await RegistrationService.registerUser(this.register);
-                    this.$router.push({path: 'login'})
-                } catch (err) {
-                    console.log(err)
+                if (this.validate(this.register, this.passwordAgain)) {
+                    try {
+                        await RegistrationService.registerUser(this.register);
+                        this.$router.push({path: 'login'})
+                    } catch (err) {
+                        if (err.response.status === 400) {
+                            this.$showSnackbar("error", err.response.data.message)
+                        }
+                    }
                 }
             },
 
@@ -88,45 +91,47 @@
                     this.validatePassword(register.password),
                     this.validatePasswordAgain(register.password, passwordAgain)
                 ];
-                for (let valid in validations) {
-                    if (valid instanceof String) {
-                        throw valid;
+                for (let valid of validations) {
+                    if (valid !== true) {
+                        this.$refs.registrationForm.validate();
+                        return false;
                     }
                 }
+                return true;
             },
 
             validateUsername(username) {
                 if (!username) {
-                    return 'Логин не может быть пустым'
+                    return 'Username required'
                 } else if (username.length > 20) {
-                    return 'Логин должен содержать не более 20 символов'
+                    return 'Username must be less than 20 characters'
                 }
                 return true;
             },
 
             validateEmail(email) {
                 if (!email) {
-                    return 'E-mail не может быть пустым';
+                    return 'E-mail required';
                 } else if (!/.+@.+/.test(email)) {
-                    return 'Неправильный формат E-mail';
+                    return 'Invalid E-mail format';
                 }
                 return true;
             },
 
             validatePassword(password) {
                 if (!password) {
-                    return 'Пароль не может быть пустым';
+                    return 'Password required';
                 } else if (password.length < 6) {
-                    return 'Пароль должен содержать не менее 6 символов';
+                    return 'Password must be more than 6 characters';
                 } else if (password.length > 30) {
-                    return 'Пароль должен содержать не более 30 символов';
+                    return 'Password must be less than 30 characters';
                 }
                 return true;
             },
 
             validatePasswordAgain(password, passwordAgain) {
                 if (password !== passwordAgain) {
-                    return 'Пароли не совпадают';
+                    return 'Passwords do not match';
                 }
                 return true;
             }

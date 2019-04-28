@@ -1,6 +1,6 @@
-import axios from 'axios';
-import Vue from './main'
-import LoginService from './service/LoginService'
+import axios from 'axios/index';
+import Vue from '../main'
+import LoginService from '../service/LoginService'
 
 export default function setupAuthInterceptor() {
     axios.interceptors.request.use(
@@ -23,18 +23,18 @@ export default function setupAuthInterceptor() {
         async (error) => {
             let response = error.response;
             if (response.status === 401) {
-                let user = Vue.$store.state.user;
                 let token = Vue.$session.get('token');
-                if (user && token) {
+                console.log(token);
+                if (token) {
                     try {
-                        let newToken = await LoginService.refreshToken(user.username, token);
-                        Vue.$session.set('token', newToken);
-                        console.log("token refreshed");
+                        let data = await LoginService.refreshToken(token);
+                        Vue.$session.set('token', data.accessToken);
                     } catch (e) {
-                        return Promise.reject(error);
+                        Vue.$router.push('/login');
                     }
+                } else {
+                    Vue.$router.push('/login');
                 }
-                // Vue.$router.push('/login');
             }
             return Promise.reject(error);
         }

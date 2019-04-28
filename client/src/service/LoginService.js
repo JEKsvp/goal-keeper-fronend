@@ -18,11 +18,10 @@ class LoginService {
         })
     }
 
-    static refreshToken(username, token) {
+    static refreshToken(token) {
         return new Promise(async (resolve, reject) => {
             try {
                 let requestBody = {
-                    username: username,
                     accessToken: token
                 };
                 const response = await axios.post('refreshToken', requestBody);
