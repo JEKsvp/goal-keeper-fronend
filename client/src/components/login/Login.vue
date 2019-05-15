@@ -31,9 +31,8 @@
 
 <script>
 
-    import Logo from '../Logo';
+    import Logo from '../util/Logo';
     import LoginService from '../../service/LoginService';
-    import UserService from '../../service/UserService'
 
     export default {
         components: {Logo},
@@ -53,8 +52,8 @@
                 let data = await this.sendLoginForm();
                 if (data) {
                     try {
-                        this.loadUserContext(data.accessToken);
-                        this.$router.push({name: 'user', params: {username: this.loginForm.username}})
+                        this.$session.set('token', data.accessToken);
+                        this.$router.push('/main')
                     } catch (e) {
                         console.log(e)
                     }
@@ -69,14 +68,7 @@
                         this.$showSnackbar('error', 'Invalid username or password');
                     }
                 }
-            },
-
-            async loadUserContext(accessToken) {
-                this.$session.set('token', accessToken);
-                let username = this.loginForm.username;
-                let user = await UserService.getUser(username);
-                this.$store.commit('login', user);
-            },
+            }
         }
     };
 </script>

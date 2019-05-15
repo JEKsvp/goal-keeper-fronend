@@ -41,7 +41,7 @@
 
 <script>
 
-    import Logo from "../Logo";
+    import Logo from "../util/Logo";
     import RegistrationService from "../../service/RegistrationService"
 
     export default {

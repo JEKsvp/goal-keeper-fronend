@@ -15,6 +15,18 @@ class UserService {
             }
         })
     }
+
+    static getCurrentUser() {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await axios.get(`${url}/current`);
+                const data = response.data;
+                resolve(data);
+            } catch (err) {
+                reject(err);
+            }
+        })
+    }
 }
 
 export default UserService;

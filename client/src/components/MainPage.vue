@@ -1,29 +1,58 @@
 <template>
     <v-container>
-        <v-layout justify-end pb-5>
-            <v-btn color="success" to="/register">Регистрация</v-btn>
+
+        <v-layout>
+            <v-flex text-xs-center>
+                <v-btn @click="logout" color="error">Выйти</v-btn>
+            </v-flex>
         </v-layout>
-        <v-layout justify-center mt-5>
-            <logo></logo>
-        </v-layout>
-        <v-layout align-center justify-center column mt-5 pt-5>
-            <v-btn large color="info" to="/login">Вход</v-btn>
-        </v-layout>
+
+        <v-bottom-nav :active.sync="bottomNav"
+                      :value="true"
+                      absolute
+                      color="transparent">
+            <v-btn color="info"
+                   flat
+                   value="add">
+                <v-icon>add_circle_outline</v-icon>
+            </v-btn>
+            <v-btn color="info"
+                   flat
+                   value="targets">
+                <v-icon>list_alt</v-icon>
+            </v-btn>
+            <v-btn color="info"
+                   flat
+                   value="account">
+                <v-icon>account_circle</v-icon>
+            </v-btn>
+        </v-bottom-nav>
     </v-container>
 </template>
 
 <script>
-    import Logo from "./Logo";
+
+    import UserService from '../service/UserService'
 
     export default {
-        name: "main-page",
-        components: {Logo},
+        name: 'main-page',
+
+        async created() {
+            let currentUser = await UserService.getCurrentUser();
+            this.$store.commit('setCurrentUser', currentUser);
+        },
+
         data() {
             return {
-                goals: []
-            };
+                bottomNav: 'targets'
+            }
         },
-        methods: {}
-    };
-</script>
 
+        methods: {
+            logout() {
+                this.$session.clear();
+                this.$router.push('/');
+            }
+        }
+    }
+</script>

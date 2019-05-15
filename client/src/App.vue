@@ -7,7 +7,7 @@
 <script>
 
 
-    import MainPage from "./components/MainPage";
+    import MainPage from "./components/WelcomePage";
     export default {
         name: 'app',
         components: {MainPage},
