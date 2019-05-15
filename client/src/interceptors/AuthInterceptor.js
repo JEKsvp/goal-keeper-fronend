@@ -3,6 +3,8 @@ import Vue from '../main'
 import LoginService from '../service/LoginService'
 
 export default function setupAuthInterceptor() {
+    let triedRefresh = false;
+
     axios.interceptors.request.use(
         (config) => {
             let token = Vue.$session.get('token');
@@ -22,7 +24,8 @@ export default function setupAuthInterceptor() {
         },
         async (error) => {
             let response = error.response;
-            if (response.status === 401) {
+            if (response.status === 401 && !triedRefresh) {
+                triedRefresh = true;
                 let token = Vue.$session.get('token');
                 if (token) {
                     try {
@@ -31,12 +34,15 @@ export default function setupAuthInterceptor() {
                         let response = await tryAgain(error);
                         return Promise.resolve(response);
                     } catch (e) {
+                        triedRefresh = false;
                         Vue.$router.push('/login');
                     }
                 } else {
+                    triedRefresh = false;
                     Vue.$router.push('/login');
                 }
             }
+            triedRefresh = false;
             return Promise.reject(error);
         }
     );
