@@ -24,11 +24,12 @@ export default function setupAuthInterceptor() {
             let response = error.response;
             if (response.status === 401) {
                 let token = Vue.$session.get('token');
-                console.log(token);
                 if (token) {
                     try {
                         let data = await LoginService.refreshToken(token);
                         Vue.$session.set('token', data.accessToken);
+                        let response = await tryAgain(error);
+                        return Promise.resolve(response);
                     } catch (e) {
                         Vue.$router.push('/login');
                     }
@@ -39,4 +40,8 @@ export default function setupAuthInterceptor() {
             return Promise.reject(error);
         }
     );
+}
+
+async function tryAgain(error) {
+    return await axios(error.config);
 }
