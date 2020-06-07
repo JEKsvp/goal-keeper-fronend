@@ -1,4 +1,4 @@
-# goal-keeper-frontend
+# bpd-frontend
 
 ## Project setup
 ```

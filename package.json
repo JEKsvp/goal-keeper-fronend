@@ -1,7 +1,7 @@
 {
-  "name": "goal-keeper-frontend",
+  "name": "bpd-frontend",
   "version": "1.0.0",
-  "description": "frontend server for goal-keeper",
+  "description": "frontend server for bpd",
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JEKsvp/goal-keeper-fronend.git"
+    "url": "git+https://github.com/JEKsvp/bpd-fronend.git"
   },
   "author": "JEKsvp",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JEKsvp/goal-keeper-fronend/issues"
+    "url": "https://github.com/JEKsvp/bpd-fronend/issues"
   },
-  "homepage": "https://github.com/JEKsvp/goal-keeper-fronend#readme",
+  "homepage": "https://github.com/JEKsvp/bpd-fronend#readme",
   "dependencies": {
     "axios": "^0.18.1",
     "body-parser": "^1.18.3",
