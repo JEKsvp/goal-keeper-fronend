@@ -1,40 +1,74 @@
 <template>
     <v-form ref="registrationForm">
-        <v-container fill-height>
-            <v-layout align-center justify-center column mt-5>
-                <logo></logo>
-                <v-flex pt-5 mt-2>
+        <v-container>
+            <v-row mt-5>
+                <v-col class="text-center" pt-5 mt-2>
+                    <logo></logo>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col offset="1"
+                       cols="10"
+                       class="text-center mb-0 pb-0">
                     <v-text-field
                             validate-on-blur
-                            label="Username"
+                            label="Логин"
+                            placeholder=" "
                             v-model="register.username"
                             :rules="loginRules">
                     </v-text-field>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col offset="1"
+                       cols="10"
+                       class="text-center mb-0 pb-0">
                     <v-text-field
                             validate-on-blur
                             label="E-mail"
+                            placeholder=" "
                             v-model="register.email"
                             :rules="emailRules">
                     </v-text-field>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col offset="1"
+                       cols="10"
+                       class="text-center mb-0 pb-0">
                     <v-text-field
                             type="password"
                             validate-on-blur
-                            label="password"
+                            label="Пароль"
+                            placeholder=" "
                             v-model="register.password"
                             :rules="passwordRules">
                     </v-text-field>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col offset="1"
+                       cols="10"
+                       class="text-center mb-0 pb-0">
                     <v-text-field
                             type="password"
                             validate-on-blur
-                            label="password again"
+                            label="Пароль еще раз"
+                            placeholder=" "
                             v-model="passwordAgain"
                             :rules="passwordAgainRules">
                     </v-text-field>
-                </v-flex>
-                <v-flex>
-                    <v-btn color="success" @click="doRegistration">Зарегистрироваться</v-btn>
-                </v-flex>
-            </v-layout>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col offset="1"
+                       cols="10"
+                       class="text-center mb-0 pb-0">
+                    <v-col>
+                        <v-btn color="success" @click="doRegistration">Зарегистрироваться</v-btn>
+                    </v-col>
+                </v-col>
+            </v-row>
         </v-container>
     </v-form>
 </template>
@@ -102,36 +136,36 @@
 
             validateUsername(username) {
                 if (!username) {
-                    return 'Username required'
+                    return 'Логин обязателен к заполению'
                 } else if (username.length > 20) {
-                    return 'Username must be less than 20 characters'
+                    return 'Длина логина должна быть не более 20 символов'
                 }
                 return true;
             },
 
             validateEmail(email) {
                 if (!email) {
-                    return 'E-mail required';
+                    return 'E-mail Обязателен к заполнению';
                 } else if (!/.+@.+/.test(email)) {
-                    return 'Invalid E-mail format';
+                    return 'Некорректный формат E-mail';
                 }
                 return true;
             },
 
             validatePassword(password) {
                 if (!password) {
-                    return 'Password required';
+                    return 'Пароль обязателен к заполнению';
                 } else if (password.length < 6) {
-                    return 'Password must be more than 6 characters';
+                    return 'Длина пароля должна быть более 6 символов';
                 } else if (password.length > 30) {
-                    return 'Password must be less than 30 characters';
+                    return 'Длина пароля должна быть менее 30 символов';
                 }
                 return true;
             },
 
             validatePasswordAgain(password, passwordAgain) {
                 if (password !== passwordAgain) {
-                    return 'Passwords do not match';
+                    return 'Пароли не совпадают';
                 }
                 return true;
             }

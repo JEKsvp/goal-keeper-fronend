@@ -1,14 +1,20 @@
 <template>
     <v-container>
-        <v-layout justify-end pb-5>
-            <v-btn color="success" to="/register">Регистрация</v-btn>
-        </v-layout>
-        <v-layout justify-center mt-5>
-            <logo></logo>
-        </v-layout>
-        <v-layout align-center justify-center column mt-5 pt-5>
-            <v-btn large color="info" to="/login">Вход</v-btn>
-        </v-layout>
+        <v-row pb-5>
+            <v-col class="text-right">
+                <v-btn color="success" to="/register">Регистрация</v-btn>
+            </v-col>
+        </v-row>
+        <v-row mt-5>
+            <v-col class="text-center">
+                <logo></logo>
+            </v-col>
+        </v-row>
+        <v-row mt-5 pt-5>
+            <v-col class="text-center">
+                <v-btn large color="info" to="/login">Вход</v-btn>
+            </v-col>
+        </v-row>
     </v-container>
 </template>
 

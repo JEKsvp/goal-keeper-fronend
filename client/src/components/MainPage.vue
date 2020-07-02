@@ -1,11 +1,10 @@
 <template>
     <v-container>
-
-        <v-layout>
-            <v-flex text-xs-center>
+        <v-row>
+            <v-col text-xs-center>
                 <v-btn @click="logout" color="error">Выйти</v-btn>
-            </v-flex>
-        </v-layout>
+            </v-col>
+        </v-row>
         <div>{{currentUser}}</div>
     </v-container>
 </template>

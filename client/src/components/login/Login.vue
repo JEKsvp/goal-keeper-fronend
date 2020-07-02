@@ -1,30 +1,38 @@
 <template>
     <v-form>
         <v-container fill-height>
-            <v-layout align-center justify-center column mt-5>
+            <v-row>
                 <logo></logo>
-                <v-flex pt-5 mt-2>
+            </v-row>
+            <v-row>
+                <v-col pt-5 mt-2 offset="1" cols="10">
                     <v-form ref="loginForm"
                             v-model="valid"
                             lazy-validation>
                         <v-text-field
                                 v-model="loginForm.username"
-                                label="Username">
+                                label="Логин"
+                                placeholder="Введите логин">
                         </v-text-field>
                         <v-text-field
                                 v-model="loginForm.password"
-                                label="Password"
-                                type="password">
+                                label="Пароль"
+                                type="password"
+                                placeholder="Введите пароль">
                         </v-text-field>
                     </v-form>
-                </v-flex>
-                <v-flex pb-0 mb-0>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col pb-0 mb-0 class="text-center">
                     <v-btn color="success" @click="doLogin">Войти</v-btn>
-                </v-flex>
-                <v-flex pt-0 mt-0>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col pt-0 mt-0 class="text-center">
                     <v-btn color="info" to="/">Назад</v-btn>
-                </v-flex>
-            </v-layout>
+                </v-col>
+            </v-row>
         </v-container>
     </v-form>
 </template>

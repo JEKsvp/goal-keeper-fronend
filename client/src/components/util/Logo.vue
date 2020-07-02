@@ -1,5 +1,5 @@
 <template>
-    <div class="display-2 font-weight-black">Goal Keeper</div>
+    <div class="display-2 font-weight-black">Помощник</div>
 </template>
 
 <script>

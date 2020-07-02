@@ -1,9 +1,9 @@
 <template>
     <v-container>
-        <v-layout>
+        <v-row>
             <v-btn @click="logout">Выйти</v-btn>
             <div>Пользователь {{user}}</div>
-        </v-layout>
+        </v-row>
     </v-container>
 </template>
 
