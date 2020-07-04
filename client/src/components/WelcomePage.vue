@@ -2,7 +2,7 @@
     <v-container>
         <v-row pb-5>
             <v-col class="text-right">
-                <v-btn color="success" to="/register">Регистрация</v-btn>
+                <v-btn color="success" to="/signup">Регистрация</v-btn>
             </v-col>
         </v-row>
         <v-row mt-5>

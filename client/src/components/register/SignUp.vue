@@ -76,7 +76,7 @@
 <script>
 
     import Logo from "../util/Logo";
-    import RegistrationService from "../../service/RegistrationService"
+    import SingUpService from "../../service/SingUpService"
 
     export default {
         components: {Logo},
@@ -108,7 +108,7 @@
             async doRegistration() {
                 if (this.validate(this.register, this.passwordAgain)) {
                     try {
-                        await RegistrationService.registerUser(this.register);
+                        await SingUpService.registerUser(this.register);
                         this.$router.push({path: 'login'})
                     } catch (err) {
                         if (err.response.status === 400) {

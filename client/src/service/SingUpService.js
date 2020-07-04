@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const url = "register";
+const url = "/api/v1/signup";
 
-class RegistrationService {
+class SingUpService {
 
     static registerUser(registerData) {
         return new Promise(async (resolve, reject) => {
@@ -17,4 +17,4 @@ class RegistrationService {
     }
 }
 
-export default RegistrationService;
+export default SingUpService;
