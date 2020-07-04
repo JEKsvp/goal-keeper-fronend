@@ -1,10 +1,18 @@
 <template>
-    <v-container>
-        <v-row>
-            <v-btn @click="logout">Выйти</v-btn>
-            <div>Пользователь {{user}}</div>
-        </v-row>
-    </v-container>
+    <v-card height="100%">
+        <v-toolbar color="teal lighten-2"
+                   dark tile>
+            <v-toolbar-title>
+                Профиль
+            </v-toolbar-title>
+        </v-toolbar>
+        <v-container>
+            <v-btn @click="logout">Logout</v-btn>
+            <v-row>
+                <div>Пользователь {{user}}</div>
+            </v-row>
+        </v-container>
+    </v-card>
 </template>
 
 <script>
@@ -23,8 +31,8 @@
             this.user = await UserService.getUser(username);
         },
 
-        methods:{
-            logout(){
+        methods: {
+            logout() {
                 this.$session.clear();
                 this.$router.push('/');
             }

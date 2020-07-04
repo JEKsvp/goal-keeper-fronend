@@ -11,7 +11,7 @@ const headers = {
     'Authorization': 'Basic Y2xpZW50aWQ6c2VjcmV0'
 };
 
-router.post('/login', async (request, response) => {
+router.post('/signin', async (request, response) => {
     try {
         let tokenResponse = await getTokenByLogin(request.body.username, request.body.password);
         TokenStorage.put(tokenResponse.data.access_token, tokenResponse.data.refresh_token);

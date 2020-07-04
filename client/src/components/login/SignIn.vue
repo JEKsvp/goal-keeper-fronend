@@ -40,7 +40,7 @@
 <script>
 
     import Logo from '../util/Logo';
-    import LoginService from '../../service/LoginService';
+    import SignInService from '../../service/SignInService';
 
     export default {
         components: {Logo},
@@ -61,7 +61,7 @@
                 if (data) {
                     try {
                         this.$session.set('token', data.accessToken);
-                        this.$router.push('/main')
+                        this.$router.push('/home')
                     } catch (e) {
                         console.log(e)
                     }
@@ -70,7 +70,7 @@
 
             async sendLoginForm() {
                 try {
-                    return await LoginService.login(this.loginForm);
+                    return await SignInService.login(this.loginForm);
                 } catch (err) {
                     if (err.response.status === 400) {
                         this.$showSnackbar('error', 'Invalid username or password');

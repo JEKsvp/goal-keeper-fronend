@@ -12,7 +12,7 @@
         </v-row>
         <v-row mt-5 pt-5>
             <v-col class="text-center">
-                <v-btn large color="info" to="/login">Вход</v-btn>
+                <v-btn large color="info" to="/signin">Вход</v-btn>
             </v-col>
         </v-row>
     </v-container>
@@ -32,7 +32,7 @@
         created() {
             let token = this.$session.get('token');
             if (token) {
-                this.$router.push('/main')
+                this.$router.push('/home')
             }
         },
         methods: {}

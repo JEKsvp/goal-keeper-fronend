@@ -1,6 +1,6 @@
 import axios from 'axios/index';
 import Vue from '../main'
-import LoginService from '../service/LoginService'
+import SignInService from '../service/SignInService'
 
 export default function setupAuthInterceptor() {
     let triedRefresh = false;
@@ -29,17 +29,17 @@ export default function setupAuthInterceptor() {
                 let token = Vue.$session.get('token');
                 if (token) {
                     try {
-                        let data = await LoginService.refreshToken(token);
+                        let data = await SignInService.refreshToken(token);
                         Vue.$session.set('token', data.accessToken);
                         let response = await tryAgain(error);
                         return Promise.resolve(response);
                     } catch (e) {
                         triedRefresh = false;
-                        Vue.$router.push('/login');
+                        Vue.$router.push('/signin');
                     }
                 } else {
                     triedRefresh = false;
-                    Vue.$router.push('/login');
+                    Vue.$router.push('/signin');
                 }
             }
             triedRefresh = false;

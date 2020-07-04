@@ -1,4 +1,5 @@
 import 'vuetify/src/styles/main.sass'
+import '@mdi/font/css/materialdesignicons.css'
 import Vue from "vue"
 import Vuetify from "vuetify/lib"
 
@@ -6,7 +7,7 @@ Vue.use(Vuetify);
 
 export default new Vuetify({
   icons: {
-    iconfont: 'md',  // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4'
+    iconfont: 'mdi',
   },
   theme: {
     dark: false,

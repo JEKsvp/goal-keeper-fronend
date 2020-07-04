@@ -1,18 +1,26 @@
 import VueRouter from "vue-router";
 
-import MainPage from './components/MainPage'
+import HomePage from './components/HomePage'
 import Register from './components/register/SignUp'
-import Login from './components/login/Login'
+import Login from './components/login/SignIn'
 import UserPage from './components/user/UserPage'
 import WelcomePage from './components/WelcomePage'
+import Diaries from "./components/diary/Diaries";
+import CreateDiary from "./components/diary/CreateDiary";
 
 
 export default new VueRouter({
     routes: [
         {path: '/', component: WelcomePage},
-        {path: '/main', component: MainPage},
-        {path: '/signup', component: Register},
-        {path: '/login', component: Login},
-        {path: '/user/:username', name: 'user', component: UserPage}
+        {
+            path: '/home', name: 'Home', component: HomePage, children:
+                [
+                    {path: '/home/users/:username', name: 'User', component: UserPage},
+                    {path: '/home/diaries/create', name: 'CreateDiary', component: CreateDiary},
+                    {path: '/home/diaries/:username', name: 'Diaries', component: Diaries}
+                ],
+        },
+        {path: '/signup', name: 'SignUp', component: Register},
+        {path: '/signin', name: 'SignIn', component: Login}
     ]
 });

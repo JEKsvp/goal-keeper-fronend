@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class LoginService {
+class SignInService {
 
     static login(loginForm) {
         return new Promise(async (resolve, reject) => {
@@ -9,7 +9,7 @@ class LoginService {
                     username: loginForm.username,
                     password: loginForm.password
                 };
-                const response = await axios.post('login', requestBody);
+                const response = await axios.post('signin', requestBody);
                 const data = response.data;
                 resolve(data);
             } catch (err) {
@@ -34,4 +34,4 @@ class LoginService {
     }
 }
 
-export default LoginService;
+export default SignInService;
