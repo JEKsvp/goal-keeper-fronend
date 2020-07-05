@@ -1,13 +1,15 @@
 <template>
     <v-card height="100%">
         <template v-if="currentUser">
-            <router-view></router-view>
-            <v-bottom-navigation absolute>
+            <v-main>
+                <router-view></router-view>
+            </v-main>
+            <v-bottom-navigation app>
                 <v-btn :to="`/home/users/${currentUser.username}`">
                     <span>Profile</span>
                     <v-icon>mdi-account</v-icon>
                 </v-btn>
-                <v-btn :to="`/home/diaries/${currentUser.username}`">
+                <v-btn :to="`/home/users/${currentUser.username}/diary/`">
                     <span>Diary</span>
                     <v-icon>mdi-format-list-text</v-icon>
                 </v-btn>

@@ -109,7 +109,7 @@
                 if (this.validate(this.register, this.passwordAgain)) {
                     try {
                         await SingUpService.registerUser(this.register);
-                        this.$router.push({path: 'login'})
+                        this.$router.push({path: 'signin'})
                     } catch (err) {
                         if (err.response.status === 400) {
                             this.$showSnackbar("error", err.response.data.message)

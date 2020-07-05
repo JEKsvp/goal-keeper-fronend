@@ -1,11 +1,6 @@
 <template>
     <v-card height="100%">
-        <v-toolbar color="teal lighten-2"
-                   dark tile>
-            <v-toolbar-title>
-                Профиль
-            </v-toolbar-title>
-        </v-toolbar>
+        <toolbar title="Профиль"></toolbar>
         <v-container>
             <v-btn @click="logout">Logout</v-btn>
             <v-row>
@@ -18,17 +13,26 @@
 <script>
 
     import UserService from '../../service/UserService'
+    import Toolbar from "../util/Toolbar";
 
     export default {
         name: 'user-page',
+        components: {Toolbar},
         data() {
             return {
-                user: {}
+                user: {},
+                isLoading: false
             }
         },
         async created() {
             let username = this.$route.params.username;
-            this.user = await UserService.getUser(username);
+            try {
+                this.isLoading = true;
+                this.user = await UserService.getUser(username);
+                this.isLoading = false;
+            } catch (e) {
+                this.$showSnackbar("error", "Ошибка загрузки пользователя.")
+            }
         },
 
         methods: {
