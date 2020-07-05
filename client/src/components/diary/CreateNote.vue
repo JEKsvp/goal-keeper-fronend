@@ -76,7 +76,6 @@
                 <v-row>
                     <v-col class="text-right" cols="11">
                         <v-btn @click="createNote"
-                               fab
                                dark
                                color="teal lighten-2">
                             <v-icon>mdi-content-save</v-icon>

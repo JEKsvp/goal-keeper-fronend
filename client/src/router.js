@@ -2,7 +2,7 @@ import VueRouter from "vue-router";
 
 import HomePage from './components/HomePage'
 import Register from './components/signup/SignUp'
-import Login from './components/login/SignIn'
+import Login from './components/signin/SignIn'
 import UserPage from './components/user/UserPage'
 import WelcomePage from './components/WelcomePage'
 import Diary from "./components/diary/Diary";

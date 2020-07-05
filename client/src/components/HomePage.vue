@@ -1,6 +1,6 @@
 <template>
     <v-card height="100%">
-        <template v-if="currentUser">
+        <template v-if="!isLoading">
             <v-main>
                 <router-view></router-view>
             </v-main>
@@ -29,14 +29,24 @@
     export default {
         name: 'main-page',
 
-        async created() {
-            this.currentUser = await UserService.getCurrentUser();
-            this.$store.commit('setCurrentUser', this.currentUser);
-        },
-
         data() {
             return {
-                currentUser: null
+                currentUser: null,
+                isLoading: true
+            }
+        },
+
+        async created() {
+            try {
+                this.isLoading = true;
+                this.currentUser = await UserService.getCurrentUser();
+                this.$store.commit('setCurrentUser', this.currentUser);
+                if (this.$route.name === 'Home') {
+                    await this.$router.push({name: "Diary", params: {username: this.currentUser.username}})
+                }
+                this.isLoading = false;
+            } catch (e) {
+                this.$showSnackbar("error", "Ошибка загрузки данных о пользователе")
             }
         },
 

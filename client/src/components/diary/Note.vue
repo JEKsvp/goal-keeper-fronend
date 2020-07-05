@@ -32,6 +32,20 @@
                     <v-card-text>{{note.oppositeThoughts.description}}</v-card-text>
                 </v-card>
             </v-container>
+            <v-container>
+                <v-row>
+                    <v-col class="text-center">
+                        <approve-dialog text="Удалить запись?"
+                                        :accept-callback="deleteNote">
+                            <v-btn dark
+                                   :loading="isDeleting"
+                                   color="error">
+                                <v-icon>mdi-delete</v-icon>
+                            </v-btn>
+                        </approve-dialog>
+                    </v-col>
+                </v-row>
+            </v-container>
         </v-container>
         <v-skeleton-loader v-else
                            type="card">
@@ -42,13 +56,15 @@
 <script>
     import Toolbar from "../util/Toolbar";
     import NoteService from "../../service/NoteService";
+    import ApproveDialog from "../util/ApproveDialog";
 
     export default {
         name: "Note",
-        components: {Toolbar},
+        components: {ApproveDialog, Toolbar},
         data: () => ({
             note: {},
-            isLoading: false
+            isLoading: false,
+            isDeleting: false
         }),
 
         computed: {
@@ -70,7 +86,20 @@
             }
         },
 
-        methods: {}
+        methods: {
+
+            async deleteNote() {
+                try {
+                    this.isDeleting = true;
+                    await NoteService.deleteNote(this.username, this.noteId);
+                    this.isDeleting = false;
+                    this.$showSnackbar("success", "Запись успешно удалена")
+                    await this.$router.push({name: "Diary", params: {username: this.username}})
+                } catch (e) {
+                    this.$showSnackbar("error", "Ошибка удаления записи")
+                }
+            }
+        }
     }
 </script>
 

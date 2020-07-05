@@ -40,6 +40,18 @@ class NoteService {
         })
     }
 
+    static deleteNote(username, noteId) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await axios.delete(`${url}/${username}/diary/notes/${noteId}`);
+                const data = response.data;
+                resolve(data);
+            } catch (err) {
+                reject(err);
+            }
+        })
+    }
+
 }
 
 export default NoteService;

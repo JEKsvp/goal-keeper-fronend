@@ -1,10 +1,18 @@
 <template>
-    <v-card height="100%">
+    <v-card flat>
         <toolbar title="Профиль"></toolbar>
         <v-container>
-            <v-btn @click="logout">Logout</v-btn>
+            <v-card tile>
+                <v-card-title>{{user.username}}</v-card-title>
+                <v-card-text>
+                    <p>E-mail: {{user.email}}</p>
+                </v-card-text>
+            </v-card>
+
             <v-row>
-                <div>Пользователь {{user}}</div>
+                <v-col class="text-center mt-5">
+                    <v-btn color="error" @click="logout">Выход</v-btn>
+                </v-col>
             </v-row>
         </v-container>
     </v-card>
