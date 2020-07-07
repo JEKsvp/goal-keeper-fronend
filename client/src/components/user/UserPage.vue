@@ -22,6 +22,7 @@
 
     import UserService from '../../service/UserService'
     import Toolbar from "../util/Toolbar";
+    import LogoutService from "../../service/LogoutService";
 
     export default {
         name: 'user-page',
@@ -44,9 +45,9 @@
         },
 
         methods: {
-            logout() {
-                this.$session.clear();
-                this.$router.push('/');
+            async logout() {
+                await LogoutService.logout();
+                await this.$router.push('/');
             }
         }
     }

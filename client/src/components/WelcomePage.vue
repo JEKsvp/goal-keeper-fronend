@@ -30,10 +30,6 @@
             };
         },
         created() {
-            let token = this.$session.get('token');
-            if (token) {
-                this.$router.push('/home')
-            }
         },
         methods: {}
     };

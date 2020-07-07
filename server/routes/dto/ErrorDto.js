@@ -4,6 +4,14 @@ module.exports = class ErrorDto {
     }
 
     static internalServerError() {
-        return new ErrorDto('Internal server error');
+        return new ErrorDto('Internal server error')
+    }
+
+    static unauthorized(){
+        return new ErrorDto('Unauthorized')
+    }
+
+    static forbidden(){
+        return new ErrorDto('Forbidden')
     }
 };

@@ -1,17 +1,35 @@
-var userTokenMap = new Map();
+const tokenClient = require('./client/TokenClient')
 
-var TokenStorage = {
-    put(accessToken, refreshToken) {
-        userTokenMap.set(accessToken, refreshToken);
+const sessionTokenMap = new Map();
+
+const TokenStorage = {
+    TOKEN_NOT_FOUND: {message: "Token not found"},
+
+    put(sessionId, tokenContainer) {
+        sessionTokenMap.set(sessionId, tokenContainer);
     },
 
-    get(accessToken) {
-        return userTokenMap.get(accessToken);
+    get(sessionId) {
+        let token = sessionTokenMap.get(sessionId);
+        if (!token) {
+            throw this.TOKEN_NOT_FOUND
+        }
+        return token;
     },
 
-    remove(accessToken) {
-        userTokenMap.delete(accessToken);
+    remove(sessionId) {
+        sessionTokenMap.delete(sessionId);
     },
+
+    async refresh(sessionId) {
+        let token = sessionTokenMap.get(sessionId);
+        if (!token) {
+            throw this.TOKEN_NOT_FOUND
+        }
+        let newToken = await tokenClient.getTokenByRefreshToken(token.refresh_token);
+        console.debug("Token refreshed")
+        sessionTokenMap.set(sessionId, newToken);
+    }
 };
 
 module.exports = TokenStorage;

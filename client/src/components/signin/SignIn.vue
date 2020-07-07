@@ -57,26 +57,15 @@
         },
         methods: {
             async doLogin() {
-                let data = await this.sendLoginForm();
-                if (data) {
-                    try {
-                        this.$session.set('token', data.accessToken);
-                        this.$router.push('/home')
-                    } catch (e) {
-                        console.log(e)
+                try {
+                    await SignInService.login(this.loginForm);
+                    await this.$router.push('/home')
+                } catch (e) {
+                    if (e.response.status === 400) {
+                        this.$showSnackbar('error', 'Неправильный логин или пароль');
                     }
                 }
             },
-
-            async sendLoginForm() {
-                try {
-                    return await SignInService.login(this.loginForm);
-                } catch (err) {
-                    if (err.response.status === 400) {
-                        this.$showSnackbar('error', 'Invalid username or password');
-                    }
-                }
-            }
         }
     };
 </script>
