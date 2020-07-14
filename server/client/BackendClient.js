@@ -3,22 +3,33 @@ const axios = require('axios')
 const tokenStorage = require('../TokenStorage')
 const errorBuilder = require('../routes/ErrorBuilder')
 const sessionService = require('../service/SessionService')
+const authService = require('../service/AuthService')
 
-const sendRequest = async function (req) {
-    const sessionId = sessionService.extractSessionId(req)
-    const token = tokenStorage.get(sessionId)
-    req.headers['Authorization'] = `Bearer ${token.access_token}`
-    return axios.request({
+const sendRequest = async function (req, res) {
+    try {
+        if (authService.needAuthorization(req)) {
+            authService.authorizeRequest(req)
+        }
+        await sendRequestInternal(req, res)
+    } catch (e) {
+        await handleBackendError(req, res, e, true)
+    }
+}
+
+async function sendRequestInternal(req, res) {
+    const proxyResp = await axios.request({
         url: `${backendUrl}${req.url}`,
         data: req.body,
         method: req.method,
         params: req.query,
         headers: req.headers
     });
+    res.status(proxyResp.status).send(proxyResp.data)
 }
 
-const handleBackendError = async function (req, res, e, needRetry) {
-    if (e === tokenStorage.TOKEN_NOT_FOUND || e === sessionService.SESSION_NOT_FOUND) {
+async function handleBackendError(req, res, e, needRetry) {
+    console.debug(e);
+    if (e === authService.UNAUTHORIZED) {
         errorBuilder.unauthorized(res)
     } else if (e.response && e.response.status === 401) {
         if (needRetry) {
@@ -38,13 +49,11 @@ async function retry(req, res) {
     try {
         let sessionId = sessionService.extractSessionId(req)
         await tokenStorage.refresh(sessionId)
-        const proxyResp = await sendRequest(req)
-        res.status(proxyResp.status).send(proxyResp.data)
+        authService.authorizeRequest(req)
+        await sendRequestInternal(req, res)
     } catch (ex) {
-        console.error(ex)
         await handleBackendError(req, res, ex, false)
     }
 }
 
 module.exports.sendRequest = sendRequest
-module.exports.handleProxyError = handleBackendError
