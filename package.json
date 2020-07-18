@@ -25,6 +25,7 @@
     "express": "^4.17.1",
     "http-proxy-middleware": "^1.0.4",
     "qs": "^6.9.4",
+    "redis": "^3.0.2",
     "uuid": "^8.2.0"
   },
   "devDependencies": {

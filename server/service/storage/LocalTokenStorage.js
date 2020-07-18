@@ -1,8 +1,8 @@
-const tokenClient = require('./client/TokenClient')
+const tokenClient = require('../../client/TokenClient')
 
 const sessionTokenMap = new Map();
 
-const TokenStorage = {
+const LocalTokenStorage = {
     TOKEN_NOT_FOUND: {message: "Token not found"},
 
     put(sessionId, tokenContainer) {
@@ -32,4 +32,4 @@ const TokenStorage = {
     }
 };
 
-module.exports = TokenStorage;
+module.exports = LocalTokenStorage;

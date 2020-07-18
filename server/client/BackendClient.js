@@ -1,6 +1,6 @@
 const backendUrl = require('../env/BackendUrl')
 const axios = require('axios')
-const tokenStorage = require('../TokenStorage')
+const tokenStorage = require('../service/storage/RedisTokenStorage')
 const errorBuilder = require('../routes/ErrorBuilder')
 const sessionService = require('../service/SessionService')
 const authService = require('../service/AuthService')
@@ -8,7 +8,7 @@ const authService = require('../service/AuthService')
 const sendRequest = async function (req, res) {
     try {
         if (authService.needAuthorization(req)) {
-            authService.authorizeRequest(req)
+            await authService.authorizeRequest(req)
         }
         await sendRequestInternal(req, res)
     } catch (e) {
@@ -49,7 +49,7 @@ async function retry(req, res) {
     try {
         let sessionId = sessionService.extractSessionId(req)
         await tokenStorage.refresh(sessionId)
-        authService.authorizeRequest(req)
+        await authService.authorizeRequest(req)
         await sendRequestInternal(req, res)
     } catch (ex) {
         await handleBackendError(req, res, ex, false)
