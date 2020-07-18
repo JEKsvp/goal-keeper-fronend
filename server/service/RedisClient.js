@@ -37,7 +37,7 @@ const setAsync = function (sessionId, tokenContainer) {
 
 const delAsync = function (sessionId) {
     return new Promise(async (resolve, reject) =>
-        RedisClient.get(sessionId, function (err, res) {
+        RedisClient.del(sessionId, function (err, res) {
             if (err) {
                 reject(err)
             } else {

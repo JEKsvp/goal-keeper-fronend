@@ -11,9 +11,7 @@ const LocalTokenStorage = {
 
     get(sessionId) {
         let token = sessionTokenMap.get(sessionId);
-        if (!token) {
-            throw this.TOKEN_NOT_FOUND
-        }
+        validateToken(token)
         return token;
     },
 
@@ -23,13 +21,17 @@ const LocalTokenStorage = {
 
     async refresh(sessionId) {
         let token = sessionTokenMap.get(sessionId);
-        if (!token) {
-            throw this.TOKEN_NOT_FOUND
-        }
+        validateToken(token)
         let newToken = await tokenClient.getTokenByRefreshToken(token.refresh_token);
         console.debug("Token refreshed")
         sessionTokenMap.set(sessionId, newToken);
     }
 };
+
+function validateToken(token) {
+    if (!token) {
+        throw LocalTokenStorage.TOKEN_NOT_FOUND
+    }
+}
 
 module.exports = LocalTokenStorage;
