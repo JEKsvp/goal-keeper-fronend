@@ -1,12 +1,13 @@
 const redis = require("redis");
+const redisProperties = require("../env/RedisProperties")
 const RedisClient = redis.createClient(
     {
-        host: 'localhost',
-        port: '6379'
+        host: redisProperties.host,
+        port: redisProperties.port
     }
 );
 
-RedisClient.on("error", function(err) {
+RedisClient.on("error", function (err) {
     console.error("REDIS ERROR", err)
 });
 

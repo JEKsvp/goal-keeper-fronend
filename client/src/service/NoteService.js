@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "/api/v1/users/";
+const url = "/api/v1/users";
 
 class NoteService {
 
