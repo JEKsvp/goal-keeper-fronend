@@ -3,7 +3,8 @@ const redisProperties = require("../env/RedisProperties")
 const RedisClient = redis.createClient(
     {
         host: redisProperties.host,
-        port: redisProperties.port
+        port: redisProperties.port,
+        password: redisProperties.password
     }
 );
 
