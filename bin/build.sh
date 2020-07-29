@@ -5,16 +5,16 @@ display_usage() {
   echo -e "\nUSAGE:\n\n ${0} <build-tag>\n"
 }
 
+if [ $# -lt 1 ]; then
+  display_usage
+  exit 1
+fi
+
 SCRIPT_PATH=$(
   cd "$(dirname "${BASH_SOURCE[0]}")" || exit
   pwd -P
 )
 "${SCRIPT_PATH}"/init.sh
-
-if [ $# -lt 1 ]; then
-  display_usage
-  exit 1
-fi
 
 WORK_DIR=$(
   cd "$(dirname "$0")" || exit
