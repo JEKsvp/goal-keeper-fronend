@@ -9,8 +9,8 @@ export default function setupAuthInterceptor() {
         },
         async (error) => {
             let response = error.response;
-            if (response.status === 401) {
-                Vue.$router.push('/');
+            if (response.status === 401 && Vue.$route.name !== 'WelcomePage') {
+                Vue.$router.push({name: 'WelcomePage'});
             }
             return Promise.reject(error);
         }

@@ -12,7 +12,7 @@ import Note from "./components/diary/Note";
 
 export default new VueRouter({
     routes: [
-        {path: '/', component: WelcomePage},
+        {path: '/', name: 'WelcomePage', component: WelcomePage},
         {
             path: '/home', name: 'Home', component: HomePage, children:
                 [
