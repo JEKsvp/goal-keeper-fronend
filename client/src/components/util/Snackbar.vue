@@ -1,5 +1,5 @@
 <template>
-    <v-snackbar bottom
+    <v-snackbar top
                 v-model="show"
                 :color="color"
                 :timeout="3000">
