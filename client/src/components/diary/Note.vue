@@ -37,11 +37,10 @@
                     <v-col class="text-center">
                         <approve-dialog text="Удалить запись?"
                                         :accept-callback="deleteNote">
-                            <v-btn dark
-                                   :loading="isDeleting"
-                                   color="error">
+                            <btn :loading="isDeleting"
+                                 color="cancel">
                                 <v-icon>mdi-delete</v-icon>
-                            </v-btn>
+                            </btn>
                         </approve-dialog>
                     </v-col>
                 </v-row>
@@ -57,10 +56,11 @@
     import Toolbar from "../util/Toolbar";
     import NoteService from "../../service/NoteService";
     import ApproveDialog from "../util/ApproveDialog";
+    import Btn from "../util/Btn";
 
     export default {
         name: "Note",
-        components: {ApproveDialog, Toolbar},
+        components: {Btn, ApproveDialog, Toolbar},
         data: () => ({
             note: {},
             isLoading: false,

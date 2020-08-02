@@ -6,16 +6,18 @@
            :to="to"
            :fab="fab"
            :text="text"
-           :x-small="xSmall">
+           :x-small="xSmall"
+           :loading="loading"
+           :small="small">
         <slot></slot>
     </v-btn>
 </template>
 
 <script>
     const BTN_TYPE = new Map([
-        ['accept', '#b5b5b5'],
-        ['create', '#b5b5b5'],
-        ['cancel', '#d96662']
+        ['accept', '#006064'],
+        ['create', '#006435'],
+        ['cancel', '#640300']
     ])
 
 
@@ -46,6 +48,14 @@
                 default: false
             },
             xSmall: {
+                type: Boolean,
+                default: false
+            },
+            small: {
+                type: Boolean,
+                default: false
+            },
+            loading: {
                 type: Boolean,
                 default: false
             }

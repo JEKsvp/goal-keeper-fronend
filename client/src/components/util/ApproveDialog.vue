@@ -15,19 +15,17 @@
             <v-divider></v-divider>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="error"
-                       dark
-                       small
-                       @click="cancel">
+                <btn color="cancel"
+                     dark
+                     small
+                     @click="cancel">
                     Отмена
-                </v-btn>
-                <v-btn color="teal lighten-2"
-                       small
-                       dark
-                       :loading="isLoading"
-                       @click="accept">
+                </btn>
+                <btn small
+                     :loading="isLoading"
+                     @click="accept">
                     Принять
-                </v-btn>
+                </btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -35,7 +33,10 @@
 
 <script>
 
+    import Btn from "./Btn";
+
     export default {
+        components: {Btn},
         props: {
             title: {
                 type: String,
