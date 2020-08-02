@@ -2,7 +2,7 @@
     <v-container>
         <v-row pb-5>
             <v-col class="text-right">
-                <v-btn color="success" to="/signup">Регистрация</v-btn>
+                <btn color="create" to="/signup">Регистрация</btn>
             </v-col>
         </v-row>
         <v-row mt-5>
@@ -12,7 +12,7 @@
         </v-row>
         <v-row mt-5 pt-5>
             <v-col class="text-center">
-                <v-btn large color="info" to="/signin">Вход</v-btn>
+                <btn large to="/signin">Вход</btn>
             </v-col>
         </v-row>
     </v-container>
@@ -20,13 +20,15 @@
 
 <script>
     import Logo from "./util/Logo";
+    import Btn from "./util/Btn";
 
     export default {
         name: "enter-page",
-        components: {Logo},
+        components: {Btn, Logo},
         data() {
             return {
-                goals: []
+                goals: [],
+                isLoading: false
             };
         },
         created() {

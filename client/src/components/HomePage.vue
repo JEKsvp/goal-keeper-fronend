@@ -45,8 +45,12 @@
                     await this.$router.push({name: "Diary", params: {username: this.currentUser.username}})
                 }
                 this.isLoading = false;
-            } catch (e) {
-                this.$showSnackbar("error", "Ошибка загрузки данных о пользователе")
+            } catch (err) {
+                if (err.response && err.response.status === 401) {
+                    this.$showSnackbar("error", "Пожалуйста авторизуйтесь.")
+                } else {
+                    this.$showSnackbar("error", "Ошибка загрузки данных о пользователе.")
+                }
             }
         },
 

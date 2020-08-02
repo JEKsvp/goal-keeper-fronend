@@ -65,8 +65,13 @@
                        cols="10"
                        class="text-center mb-0 pb-0">
                     <v-col>
-                        <v-btn color="success" @click="doRegistration">Зарегистрироваться</v-btn>
+                        <btn @click="doRegistration">Зарегистрироваться</btn>
                     </v-col>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col pt-0 mt-0 class="text-center">
+                    <btn color="cancel" to="/">Назад</btn>
                 </v-col>
             </v-row>
         </v-container>
@@ -77,9 +82,10 @@
 
     import Logo from "../util/Logo";
     import SingUpService from "../../service/SingUpService"
+    import Btn from "../util/Btn";
 
     export default {
-        components: {Logo},
+        components: {Btn, Logo},
         data() {
             return {
                 valid: false,
@@ -113,7 +119,7 @@
                     } catch (err) {
                         if (err.response.status === 400) {
                             this.$showSnackbar("error", err.response.data.message)
-                        }else {
+                        } else {
                             console.log(err)
                         }
                     }

@@ -75,11 +75,9 @@
                 </v-row>
                 <v-row>
                     <v-col class="text-right" cols="11">
-                        <v-btn @click="createNote"
-                               dark
-                               color="teal lighten-2">
+                        <btn @click="createNote">
                             <v-icon>mdi-content-save</v-icon>
-                        </v-btn>
+                        </btn>
                     </v-col>
                 </v-row>
             </v-container>
@@ -91,10 +89,11 @@
     import Toolbar from "../util/Toolbar";
     import NoteService from "../../service/NoteService";
     import ValidationService from "../../service/ValidationService";
+    import Btn from "../util/Btn";
 
     export default {
         name: "CreateNote",
-        components: {Toolbar},
+        components: {Btn, Toolbar},
         data: () => ({
             createNoteRequest: {
                 event: {

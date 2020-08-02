@@ -6,13 +6,10 @@ class DiaryService {
 
     static getDiaryByUsername(username) {
         return new Promise(async (resolve, reject) => {
-            try {
-                const response = await axios.get(`${url}/${username}/diary`);
-                const data = response.data;
-                resolve(data);
-            } catch (err) {
-                reject(err);
-            }
+            axios.get(`${url}/${username}/diary`).then(
+                response => resolve(response.data),
+                err => reject(err)
+            )
         })
     }
 }

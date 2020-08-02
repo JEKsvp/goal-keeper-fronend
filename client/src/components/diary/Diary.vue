@@ -16,12 +16,11 @@
         <v-container class="pt-0 mt-0" v-if="!isLoading">
             <v-row>
                 <v-col class="text-right">
-                    <v-btn dark
-                           fab
-                           color="teal lighten-2"
-                           :to="`/home/users/${username}/diary/notes/create`">
+                    <btn fab
+                         color="create"
+                         :to="`/home/users/${username}/diary/notes/create`">
                         <v-icon>mdi-plus</v-icon>
-                    </v-btn>
+                    </btn>
                 </v-col>
             </v-row>
         </v-container>
@@ -35,10 +34,11 @@
     import Toolbar from "../util/Toolbar";
     import DiaryService from "../../service/DiaryService";
     import NoteService from "../../service/NoteService";
+    import Btn from "../util/Btn";
 
     export default {
         name: "Diary",
-        components: {Toolbar},
+        components: {Btn, Toolbar},
         data: () => ({
             diary: {
                 name: "Дневник"

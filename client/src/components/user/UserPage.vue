@@ -11,7 +11,7 @@
 
             <v-row>
                 <v-col class="text-center mt-5">
-                    <v-btn color="error" @click="logout">Выход</v-btn>
+                    <btn color="cancel" @click="logout">Выход</btn>
                 </v-col>
             </v-row>
         </v-container>
@@ -23,10 +23,11 @@
     import UserService from '../../service/UserService'
     import Toolbar from "../util/Toolbar";
     import LogoutService from "../../service/LogoutService";
+    import Btn from "../util/Btn";
 
     export default {
         name: 'user-page',
-        components: {Toolbar},
+        components: {Btn, Toolbar},
         data() {
             return {
                 user: {},

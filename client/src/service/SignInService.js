@@ -4,32 +4,26 @@ class SignInService {
 
     static login(loginForm) {
         return new Promise(async (resolve, reject) => {
-            try {
-                let requestBody = {
-                    username: loginForm.username,
-                    password: loginForm.password
-                };
-                const response = await axios.post('signin', requestBody);
-                const data = response.data;
-                resolve(data);
-            } catch (err) {
-                reject(err);
-            }
+            let requestBody = {
+                username: loginForm.username,
+                password: loginForm.password
+            };
+            axios.post('signin', requestBody).then(
+                response => resolve(response.data),
+                err => reject(err)
+            );
         })
     }
 
     static refreshToken(token) {
         return new Promise(async (resolve, reject) => {
-            try {
-                let requestBody = {
-                    accessToken: token
-                };
-                const response = await axios.post('refreshToken', requestBody);
-                const data = response.data;
-                resolve(data);
-            } catch (err) {
-                reject(err);
-            }
+            let requestBody = {
+                accessToken: token
+            };
+            axios.post('refreshToken', requestBody).then(
+                response => resolve(response.data),
+                err => reject(err)
+            );
         })
     }
 }

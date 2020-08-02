@@ -10,7 +10,7 @@ export default function setupAuthInterceptor() {
         async (error) => {
             let response = error.response;
             if (response.status === 401) {
-                Vue.$router.push('/signin');
+                Vue.$router.push('/');
             }
             return Promise.reject(error);
         }

@@ -25,12 +25,12 @@
             </v-row>
             <v-row>
                 <v-col pb-0 mb-0 class="text-center">
-                    <v-btn color="success" @click="doLogin">Войти</v-btn>
+                    <btn @click="doLogin">Войти</btn>
                 </v-col>
             </v-row>
             <v-row>
                 <v-col pt-0 mt-0 class="text-center">
-                    <v-btn color="info" to="/">Назад</v-btn>
+                    <btn color="cancel" to="/">Назад</btn>
                 </v-col>
             </v-row>
         </v-container>
@@ -41,9 +41,10 @@
 
     import Logo from '../util/Logo';
     import SignInService from '../../service/SignInService';
+    import Btn from "../util/Btn";
 
     export default {
-        components: {Logo},
+        components: {Btn, Logo},
         name: 'login',
         data() {
             return {

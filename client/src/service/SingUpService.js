@@ -6,13 +6,10 @@ class SingUpService {
 
     static registerUser(registerData) {
         return new Promise(async (resolve, reject) => {
-            try {
-                const response = await axios.post(url, registerData);
-                const data = response.data;
-                resolve(data);
-            } catch (err) {
-                reject(err);
-            }
+            axios.post(url, registerData).then(
+                response => resolve(response.data),
+                err => reject(err)
+            );
         })
     }
 }
