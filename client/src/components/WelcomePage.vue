@@ -1,17 +1,18 @@
 <template>
     <v-container>
         <template v-if="!isLoading">
-            <v-row pb-5>
-                <v-col class="text-right">
-                    <btn color="create" to="/signup">Регистрация</btn>
-                </v-col>
-            </v-row>
             <v-row mt-5>
                 <v-col class="text-center">
                     <logo></logo>
                 </v-col>
             </v-row>
-            <v-row mt-5 pt-5>
+            <v-row pb-5>
+                <v-col class="text-center">
+                    <btn color="create" to="/signup">Регистрация</btn>
+                </v-col>
+            </v-row>
+            <div class="text-center text-subtitle-1">или</div>
+            <v-row mt-0 pt-0>
                 <v-col class="text-center">
                     <btn large to="/signin">Вход</btn>
                 </v-col>

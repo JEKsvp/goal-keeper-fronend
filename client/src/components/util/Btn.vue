@@ -13,9 +13,9 @@
 
 <script>
     const BTN_TYPE = new Map([
-        ['accept', '#26b7bf'],
-        ['create', '#26bf7a'],
-        ['cancel', '#ff3a13']
+        ['accept', '#b5b5b5'],
+        ['create', '#b5b5b5'],
+        ['cancel', '#d96662']
     ])
 
 

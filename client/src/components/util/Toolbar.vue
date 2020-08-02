@@ -1,10 +1,11 @@
 <template>
-    <v-toolbar color="#42a1a6"
-               dark tile>
+    <v-toolbar
+                tile
+    style="background-color: #ffffff00">
         <v-btn v-if="backBtn"
                text
                icon
-               color="white"
+               color="#6b8763"
                @click="goBack">
             <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
