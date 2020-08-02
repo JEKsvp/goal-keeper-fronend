@@ -8,11 +8,15 @@ import WelcomePage from './components/WelcomePage'
 import Diary from "./components/diary/Diary";
 import CreateNote from "./components/diary/CreateNote";
 import Note from "./components/diary/Note";
+import Contacts from "./components/contacts/Contacts";
+import AboutUs from "./components/aboutus/AboutUs";
 
 
 export default new VueRouter({
     routes: [
         {path: '/', name: 'WelcomePage', component: WelcomePage},
+        {path: '/contacts', name: 'Contacts', component: Contacts},
+        {path: '/aboutus', name: 'AboutUs', component: AboutUs},
         {
             path: '/home', name: 'Home', component: HomePage, children:
                 [

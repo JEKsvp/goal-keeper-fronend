@@ -17,6 +17,7 @@
                 </v-col>
             </v-row>
         </template>
+        <bpd-footer></bpd-footer>
     </v-container>
 </template>
 
@@ -24,10 +25,11 @@
     import Logo from "./util/Logo";
     import Btn from "./util/Btn";
     import UserService from "../service/UserService";
+    import BpdFooter from "./util/BpdFooter";
 
     export default {
-        name: "enter-page",
-        components: {Btn, Logo},
+        name: "WelcomePage",
+        components: {BpdFooter, Btn, Logo},
         data() {
             return {
                 goals: [],

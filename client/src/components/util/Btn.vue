@@ -4,7 +4,9 @@
            :color="innerColor"
            :large="large"
            :to="to"
-           :fab="fab">
+           :fab="fab"
+           :text="text"
+           :x-small="xSmall">
         <slot></slot>
     </v-btn>
 </template>
@@ -36,6 +38,14 @@
                 default: 'accept'
             },
             fab: {
+                type: Boolean,
+                default: false
+            },
+            text: {
+                type: Boolean,
+                default: false
+            },
+            xSmall: {
                 type: Boolean,
                 default: false
             }

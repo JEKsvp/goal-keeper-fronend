@@ -1,6 +1,13 @@
 <template>
-    <v-toolbar color="teal lighten-2"
+    <v-toolbar color="#42a1a6"
                dark tile>
+        <v-btn v-if="backBtn"
+               text
+               icon
+               color="white"
+               @click="goBack">
+            <v-icon>mdi-chevron-left</v-icon>
+        </v-btn>
         <v-toolbar-title>
             {{title}}
         </v-toolbar-title>
@@ -14,6 +21,23 @@
             title: {
                 type: String,
                 required: true
+            },
+            backBtn: {
+                type: Boolean,
+                default: false
+            },
+            backRoute: {
+                type: String
+            }
+        },
+
+        methods: {
+            goBack() {
+                if (this.backRoute) {
+                    this.$router.push(this.backRoute)
+                } else {
+                    this.$router.back();
+                }
             }
         }
     }
