@@ -1,5 +1,7 @@
 <template>
-    <div class="display-2 font-weight-black">Помощник</div>
+    <p class="logo text-h4 text-sm-h2 text-center font-weight-bold">
+        Дневник <br>самонаблюдения
+    </p>
 </template>
 
 <script>
@@ -7,3 +9,9 @@
         name: 'logo'
     }
 </script>
+
+<style scoped>
+    .logo {
+        width: 100%;
+    }
+</style>
