@@ -11,6 +11,7 @@
                        cols="10"
                        class="text-center mb-0 pb-0">
                     <v-text-field
+                            @keyup.enter="focusEmail"
                             validate-on-blur
                             label="Логин"
                             placeholder=" "
@@ -24,6 +25,8 @@
                        cols="10"
                        class="text-center mb-0 pb-0">
                     <v-text-field
+                            @keyup.enter="focusPassword"
+                            ref="signUpEmail"
                             validate-on-blur
                             label="E-mail"
                             placeholder=" "
@@ -37,6 +40,8 @@
                        cols="10"
                        class="text-center mb-0 pb-0">
                     <v-text-field
+                            @keyup.enter="focusPasswordAgain"
+                            ref="signUpPassword"
                             type="password"
                             validate-on-blur
                             label="Пароль"
@@ -51,6 +56,8 @@
                        cols="10"
                        class="text-center mb-0 pb-0">
                     <v-text-field
+                            @keyup.enter="blurAndDoRegistration"
+                            ref="signUpPasswordAgain"
                             type="password"
                             validate-on-blur
                             label="Пароль еще раз"
@@ -111,6 +118,27 @@
         },
 
         methods: {
+            focusEmail() {
+                this.$refs.signUpEmail.focus();
+            },
+
+            focusPassword() {
+                this.$refs.signUpPassword.focus();
+            },
+
+            focusPasswordAgain() {
+                this.$refs.signUpPasswordAgain.focus();
+            },
+
+            blurAndDoRegistration() {
+                this.blurPasswordAgain();
+                this.doRegistration();
+            },
+
+            blurPasswordAgain() {
+                this.$refs.signUpPasswordAgain.blur();
+            },
+
             async doRegistration() {
                 if (this.validate(this.register, this.passwordAgain)) {
                     try {

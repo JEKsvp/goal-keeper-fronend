@@ -10,11 +10,14 @@
                             v-model="valid"
                             lazy-validation>
                         <v-text-field
+                                @keyup.enter="focusPassword"
                                 v-model="loginForm.username"
                                 label="Логин"
                                 placeholder="Введите логин">
                         </v-text-field>
                         <v-text-field
+                                ref="loginFormPassword"
+                                @keyup.enter="doLogin"
                                 v-model="loginForm.password"
                                 label="Пароль"
                                 type="password"
@@ -57,6 +60,10 @@
             }
         },
         methods: {
+            focusPassword() {
+                this.$refs.loginFormPassword.focus()
+            },
+
             async doLogin() {
                 try {
                     await SignInService.login(this.loginForm);
