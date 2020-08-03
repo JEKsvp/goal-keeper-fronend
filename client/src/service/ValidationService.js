@@ -16,4 +16,12 @@ export default class ValidationService {
             }
         }
     }
+
+    static getInvalidParameterNumber(ruleContainers) {
+        for (let i = 0; i < ruleContainers.length; i++) {
+            if (ruleContainers[i].rule(ruleContainers[i].param) !== true) {
+                return i
+            }
+        }
+    }
 }

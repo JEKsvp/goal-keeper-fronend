@@ -8,7 +8,8 @@
            :text="text"
            :x-small="xSmall"
            :loading="loading"
-           :small="small">
+           :small="small"
+           :elevation="elevation">
         <slot></slot>
     </v-btn>
 </template>
@@ -58,6 +59,9 @@
             loading: {
                 type: Boolean,
                 default: false
+            },
+            elevation: {
+                type: [Number, String]
             }
         },
 
