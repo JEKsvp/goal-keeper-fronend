@@ -72,13 +72,13 @@
                        cols="10"
                        class="text-center mb-0 pb-0">
                     <v-col>
-                        <btn @click="doRegistration">Зарегистрироваться</btn>
+                        <btn type="primary" @click="doRegistration">Зарегистрироваться</btn>
                     </v-col>
                 </v-col>
             </v-row>
             <v-row>
                 <v-col pt-0 mt-0 class="text-center">
-                    <btn color="cancel" to="/">Назад</btn>
+                    <btn type="cancel" to="/">Назад</btn>
                 </v-col>
             </v-row>
         </v-container>

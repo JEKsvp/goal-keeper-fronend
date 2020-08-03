@@ -1,5 +1,5 @@
 <template>
-    <v-toolbar color="#006164"
+    <v-toolbar :color="getColor"
                dark tile>
         <v-btn v-if="backBtn"
                text
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+    import Colors from "../../Colors";
+
     export default {
         name: "Toolbar",
         props: {
@@ -28,6 +30,12 @@
             },
             backRoute: {
                 type: String
+            }
+        },
+
+        computed: {
+            getColor() {
+                return Colors.TOOLBAR.BACKGROUND
             }
         },
 

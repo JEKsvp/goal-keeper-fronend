@@ -28,12 +28,12 @@
             </v-row>
             <v-row>
                 <v-col pb-0 mb-0 class="text-center">
-                    <btn @click="doLogin">Войти</btn>
+                    <btn @click="doLogin" type="primary">Войти</btn>
                 </v-col>
             </v-row>
             <v-row>
                 <v-col pt-0 mt-0 class="text-center">
-                    <btn color="cancel" to="/">Назад</btn>
+                    <btn type="cancel" to="/">Назад</btn>
                 </v-col>
             </v-row>
         </v-container>

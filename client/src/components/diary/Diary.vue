@@ -17,7 +17,7 @@
             <v-row>
                 <v-col class="text-right">
                     <btn fab
-                         color="create"
+                         type="primary"
                          :to="`/home/users/${username}/diary/notes/create`">
                         <v-icon>mdi-plus</v-icon>
                     </btn>

@@ -15,13 +15,11 @@
             <v-divider></v-divider>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <btn color="cancel"
-                     dark
-                     small
+                <btn type="primary"
                      @click="cancel">
                     Отмена
                 </btn>
-                <btn small
+                <btn type="secondary"
                      :loading="isLoading"
                      @click="accept">
                     Принять

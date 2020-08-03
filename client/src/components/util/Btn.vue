@@ -1,7 +1,7 @@
 <template>
     <v-btn @click="click"
            :dark="dark"
-           :color="innerColor"
+           :color="getColor"
            :large="large"
            :to="to"
            :fab="fab"
@@ -9,16 +9,20 @@
            :x-small="xSmall"
            :loading="loading"
            :small="small"
-           :elevation="elevation">
+           :elevation="elevation"
+           :outlined="getOutlined">
         <slot></slot>
     </v-btn>
 </template>
 
 <script>
+
+    import Colors from '../../Colors'
+
     const BTN_TYPE = new Map([
-        ['accept', '#006064'],
-        ['create', '#006435'],
-        ['cancel', '#640300']
+        ['primary', {color: Colors.BTN.PRIMARY, outlined: false}],
+        ['secondary', {color: Colors.BTN.SECONDARY, outlined: true}],
+        ['cancel', {color: Colors.BTN.CANCEL, outlined: true}]
     ])
 
 
@@ -36,9 +40,9 @@
                 type: Boolean,
                 default: false
             },
-            color: {
+            type: {
                 type: String,
-                default: 'accept'
+                default: 'primary'
             },
             fab: {
                 type: Boolean,
@@ -66,8 +70,19 @@
         },
 
         computed: {
-            innerColor() {
-                return BTN_TYPE.get(this.color) || this.color
+            getColor() {
+                const style = BTN_TYPE.get(this.type)
+                if (!style) {
+                    throw 'style-type not found'
+                }
+                return style.color;
+            },
+            getOutlined() {
+                const style = BTN_TYPE.get(this.type)
+                if (!style) {
+                    throw 'style-type not found'
+                }
+                return style.outlined;
             }
         },
 

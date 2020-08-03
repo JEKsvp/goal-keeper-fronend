@@ -39,7 +39,7 @@
                             <v-card-actions class="pa-0 ma-0 text-center">
                                 <v-row class="ma-0 pa-0">
                                     <v-col class="text-right ma-0 pa-0">
-                                        <btn text fab @click="nextStep">
+                                        <btn type="secondary" small fab @click="nextStep">
                                             <v-icon>mdi-chevron-right</v-icon>
                                         </btn>
                                     </v-col>
@@ -61,12 +61,12 @@
                             <v-card-actions class="pa-0 ma-0 text-center">
                                 <v-row class="ma-0 pa-0">
                                     <v-col class="text-left ma-0 pa-0">
-                                        <btn text fab @click="previousStep">
+                                        <btn type="secondary" small fab @click="previousStep">
                                             <v-icon>mdi-chevron-left</v-icon>
                                         </btn>
                                     </v-col>
                                     <v-col class="text-right ma-0 pa-0">
-                                        <btn text fab @click="nextStep">
+                                        <btn type="secondary" small fab @click="nextStep">
                                             <v-icon>mdi-chevron-right</v-icon>
                                         </btn>
                                     </v-col>
@@ -89,12 +89,12 @@
                             <v-card-actions class="pa-0 ma-0 text-center">
                                 <v-row class="ma-0 pa-0">
                                     <v-col class="text-left ma-0 pa-0">
-                                        <btn text fab @click="previousStep">
+                                        <btn type="secondary" small fab @click="previousStep">
                                             <v-icon>mdi-chevron-left</v-icon>
                                         </btn>
                                     </v-col>
                                     <v-col class="text-right ma-0 pa-0">
-                                        <btn text fab @click="nextStep">
+                                        <btn type="secondary" small fab @click="nextStep">
                                             <v-icon>mdi-chevron-right</v-icon>
                                         </btn>
                                     </v-col>
@@ -117,12 +117,12 @@
                             <v-card-actions class="pa-0 ma-0 text-center">
                                 <v-row class="ma-0 pa-0">
                                     <v-col class="text-left ma-0 pa-0">
-                                        <btn text fab @click="previousStep">
+                                        <btn type="secondary" small fab @click="previousStep">
                                             <v-icon>mdi-chevron-left</v-icon>
                                         </btn>
                                     </v-col>
                                     <v-col class="text-right ma-0 pa-0">
-                                        <btn text fab @click="nextStep">
+                                        <btn type="secondary" small fab @click="nextStep">
                                             <v-icon>mdi-chevron-right</v-icon>
                                         </btn>
                                     </v-col>
@@ -144,13 +144,13 @@
                             <v-card-actions class="pa-0 ma-0 text-center">
                                 <v-row class="ma-0 pa-0">
                                     <v-col class="text-left ma-0 pa-0">
-                                        <btn text fab @click="previousStep">
+                                        <btn type="secondary" small fab @click="previousStep">
                                             <v-icon>mdi-chevron-left</v-icon>
                                         </btn>
                                     </v-col>
                                     <v-col class="text-right ma-0 pa-0">
-                                        <btn elevation="0" fab @click="createNote">
-                                            <v-icon>mdi-content-save</v-icon>
+                                        <btn type="primary" small fab elevation="0" @click="createNote">
+                                            <v-icon small>mdi-content-save</v-icon>
                                         </btn>
                                     </v-col>
                                 </v-row>
@@ -205,7 +205,6 @@
                     this.validate();
                 } catch (e) {
                     this.goToInvalidStep();
-                    this.$showSnackbar('error', e);
                     return;
                 }
                 try {
@@ -240,11 +239,11 @@
             },
 
             nextStep() {
-                this.step = this.step + 1
+                this.step++;
             },
 
             previousStep() {
-                this.step = this.step - 1
+                this.step--;
             }
         }
     }

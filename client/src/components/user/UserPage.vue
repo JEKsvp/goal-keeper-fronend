@@ -11,7 +11,7 @@
 
             <v-row>
                 <v-col class="text-center mt-5">
-                    <btn color="cancel" @click="logout">Выход</btn>
+                    <btn type="cancel" @click="logout">Выход</btn>
                 </v-col>
             </v-row>
         </v-container>

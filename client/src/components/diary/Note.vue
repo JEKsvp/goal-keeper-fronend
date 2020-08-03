@@ -38,7 +38,7 @@
                         <approve-dialog text="Удалить запись?"
                                         :accept-callback="deleteNote">
                             <btn :loading="isDeleting"
-                                 color="cancel">
+                                 type="cancel">
                                 <v-icon>mdi-delete</v-icon>
                             </btn>
                         </approve-dialog>

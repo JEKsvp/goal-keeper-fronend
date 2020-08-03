@@ -8,13 +8,13 @@
             </v-row>
             <v-row pb-5>
                 <v-col class="text-center">
-                    <btn color="create" to="/signup">Регистрация</btn>
+                    <btn type="secondary" to="/signup">Регистрация</btn>
                 </v-col>
             </v-row>
             <div class="text-center text-subtitle-1">или</div>
             <v-row mt-0 pt-0>
                 <v-col class="text-center">
-                    <btn large to="/signin">Вход</btn>
+                    <btn large type="primary" to="/signin">Вход</btn>
                 </v-col>
             </v-row>
         </template>
