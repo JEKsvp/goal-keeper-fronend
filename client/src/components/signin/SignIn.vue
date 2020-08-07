@@ -12,7 +12,7 @@
                         <v-text-field
                                 @keyup.enter="focusPassword"
                                 v-model="loginForm.username"
-                                label="Логин"
+                                label="Логин или email"
                                 placeholder="Введите логин">
                         </v-text-field>
                         <v-text-field
