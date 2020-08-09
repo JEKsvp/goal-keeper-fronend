@@ -3,11 +3,10 @@ const redisClient = require('../RedisClient')
 
 const RedisTokenStorage = {
     TOKEN_NOT_FOUND: {message: "Token not found"},
+    TOKEN_TTL: 60 * 60 * 24 * 21,
 
     async put(sessionId, tokenContainer) {
-        await redisClient.setAsync(sessionId, JSON.stringify(tokenContainer), () => {
-            console.log("lol")
-        });
+        await redisClient.setAsync(sessionId, JSON.stringify(tokenContainer), this.TOKEN_TTL);
     },
 
     async get(sessionId) {
@@ -26,7 +25,7 @@ const RedisTokenStorage = {
         let token = JSON.parse(tokenString);
         let newToken = await tokenClient.getTokenByRefreshToken(token.refresh_token);
         console.debug("Token refreshed")
-        await redisClient.setAsync(sessionId, JSON.stringify(newToken));
+        await redisClient.setAsync(sessionId, JSON.stringify(newToken), this.TOKEN_TTL);
     }
 };
 

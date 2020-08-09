@@ -25,9 +25,9 @@ const getAsync = function (sessionId) {
     )
 }
 
-const setAsync = function (sessionId, tokenContainer) {
+const setAsync = function (key, value, ttl) {
     return new Promise(async (resolve, reject) =>
-        RedisClient.set(sessionId, tokenContainer, function (err, res) {
+        RedisClient.set(key, value, 'EX', ttl, function (err, res) {
             if (err) {
                 reject(err)
             } else {
