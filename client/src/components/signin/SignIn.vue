@@ -12,8 +12,8 @@
                         <v-text-field
                                 @keyup.enter="focusPassword"
                                 v-model="loginForm.username"
-                                label="Логин или email"
-                                placeholder="Введите логин">
+                                label="Имя пользователя или email"
+                                placeholder="Введите Имя пользователя">
                         </v-text-field>
                         <v-text-field
                                 ref="loginFormPassword"
@@ -70,7 +70,7 @@
                     await this.$router.push('/home')
                 } catch (e) {
                     if (e.response.status === 400) {
-                        this.$showSnackbar('error', 'Неправильный логин или пароль');
+                        this.$showSnackbar('error', 'Неправильное имя пользователя или пароль');
                     }
                 }
             },

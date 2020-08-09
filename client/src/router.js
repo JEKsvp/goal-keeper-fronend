@@ -1,6 +1,6 @@
 import VueRouter from "vue-router";
 
-import HomePage from './components/HomePage'
+import HomePage from './components/home/HomePage'
 import Register from './components/signup/SignUp'
 import Login from './components/signin/SignIn'
 import UserPage from './components/user/UserPage'
