@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    import Colors from "../../Colors";
+    import Colors from "../../util/Colors";
 
     export default {
         name: "Toolbar",

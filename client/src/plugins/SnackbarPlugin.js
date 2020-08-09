@@ -1,4 +1,4 @@
-import Colors from "../Colors";
+import Colors from "../util/Colors";
 
 export default {
     install(Vue) {

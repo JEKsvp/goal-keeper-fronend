@@ -90,6 +90,7 @@
     import Logo from "../util/Logo";
     import SingUpService from "../../service/SingUpService"
     import Btn from "../util/Btn";
+    import Roles from "../../util/Roles";
 
     export default {
         components: {Btn, Logo},
@@ -99,7 +100,11 @@
                 register: {
                     username: '',
                     email: '',
-                    password: ''
+                    password: '',
+                    role: Roles.PATIENT,
+                    firstName: null,
+                    lastName: null,
+                    aboutMe: null
                 },
                 passwordAgain: '',
                 loginRules: [

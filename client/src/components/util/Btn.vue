@@ -17,7 +17,7 @@
 
 <script>
 
-    import Colors from '../../Colors'
+    import Colors from '../../util/Colors'
 
     const BTN_TYPE = new Map([
         ['primary', {color: Colors.BTN.PRIMARY, outlined: false}],

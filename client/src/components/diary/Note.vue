@@ -1,6 +1,6 @@
 <template>
     <v-card flat>
-        <toolbar title="Запись"></toolbar>
+        <toolbar back-btn title="Запись"></toolbar>
         <v-container v-if="!isLoading">
             <v-container>
                 <v-card tile>
