@@ -9,6 +9,10 @@ const ErrorBuilder = {
         res.status(403)
             .json(ErrorDto.forbidden())
     },
+    clientError: function (res, err) {
+        res.status(err.response.status)
+            .json(err.response.data)
+    },
     internalServerError: function (res) {
         res.status(500)
             .json(ErrorDto.internalServerError())

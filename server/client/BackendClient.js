@@ -27,20 +27,26 @@ async function sendRequestInternal(req, res) {
     res.status(proxyResp.status).send(proxyResp.data)
 }
 
-async function handleBackendError(req, res, e, needRetry) {
-    console.debug(e);
-    if (e === authService.UNAUTHORIZED) {
+function isClientError(e) {
+    return e.response && e.response.status >= 400 || e.response.status < 500;
+}
+
+async function handleBackendError(req, res, err, needRetry) {
+    console.debug(err);
+    if (err === authService.UNAUTHORIZED) {
         errorBuilder.unauthorized(res)
-    } else if (e.response && e.response.status === 401) {
+    } else if (err.response && err.response.status === 401) {
         if (needRetry) {
             await retry(req, res)
             return
         }
         errorBuilder.unauthorized(res)
-    } else if (e.response && e.response.status === 403) {
+    } else if (err.response && err.response.status === 403) {
         errorBuilder.forbidden(res)
+    } else if (isClientError(err)) {
+        errorBuilder.clientError(res, err)
     } else {
-        console.error(e)
+        console.error(err)
         errorBuilder.internalServerError(res)
     }
 }
