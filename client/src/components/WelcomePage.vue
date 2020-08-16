@@ -40,8 +40,8 @@
         async created() {
             try {
                 this.isLoading = true;
-                let currentUser = await UserService.getCurrentUser();
-                await this.$router.push({name: "Diary", params: {username: currentUser.username}})
+                await UserService.getCurrentUser();
+                await this.$router.push({name: "Home"})
             } catch (e) {
                 console.debug('User unauthorized')
             } finally {

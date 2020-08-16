@@ -13,7 +13,7 @@
 
 <script>
     export default {
-        name: "PatientBottomNavigation",
+        name: "ClientBottomNavigation",
 
         computed: {
             getCurrentUser() {

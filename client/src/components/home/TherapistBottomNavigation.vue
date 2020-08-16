@@ -9,7 +9,7 @@
 
 <script>
     export default {
-        name: "PsychotherapistBottomNavigation",
+        name: "TherapistBottomNavigation",
 
         computed: {
             getCurrentUser() {

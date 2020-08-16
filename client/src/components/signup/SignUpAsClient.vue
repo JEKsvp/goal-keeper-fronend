@@ -1,5 +1,5 @@
 <template>
-    <v-form ref="registrationAsPatientForm">
+    <v-form ref="registrationAsClientForm">
         <v-row>
             <v-col offset="1"
                    cols="10"
@@ -80,7 +80,7 @@
     import SignUpMixin from "./SignUpMixin";
 
     export default {
-        name: "SignUpAsPatient",
+        name: "SignUpAsClient",
         components: {Btn},
         mixins: [SignUpMixin],
         data() {
@@ -90,7 +90,7 @@
                     username: '',
                     email: '',
                     password: '',
-                    role: Roles.PATIENT
+                    role: Roles.CLIENT
                 },
                 passwordAgain: ''
             }
@@ -106,7 +106,7 @@
                 ];
                 for (let valid of validations) {
                     if (valid !== true) {
-                        this.$refs.registrationAsPatientForm.validate();
+                        this.$refs.registrationAsClientForm.validate();
                         return false;
                     }
                 }

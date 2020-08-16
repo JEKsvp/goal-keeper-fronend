@@ -9,7 +9,7 @@
                 <v-card-text>
                     <p>Имя пользователя: {{user.username}}</p>
                     <p>E-mail: {{user.email}}</p>
-                    <div v-if="isPsychotherapist">
+                    <div v-if="isTherapist">
                         <p>Имя: {{user.firstName}}</p>
                         <p>Фамилия: {{user.lastName}}</p>
                         <p>Обо мне: {{user.aboutMe}}</p>
@@ -55,8 +55,8 @@
         },
 
         computed: {
-            isPsychotherapist() {
-                return this.user.roles.includes(Roles.PSYCHOTHERAPIST)
+            isTherapist() {
+                return this.user.roles.includes(Roles.THERAPIST)
             }
         },
 

@@ -14,10 +14,10 @@
         </v-tabs>
         <v-tabs-items v-model="tab">
             <v-tab-item>
-                <sign-up-as-patient></sign-up-as-patient>
+                <sign-up-as-client></sign-up-as-client>
             </v-tab-item>
             <v-tab-item>
-                <sign-up-as-psychotherapist></sign-up-as-psychotherapist>
+                <sign-up-as-therapist></sign-up-as-therapist>
             </v-tab-item>
         </v-tabs-items>
     </v-container>
@@ -27,11 +27,11 @@
 
     import Logo from "../util/Logo";
     import Colors from "../../util/Colors";
-    import SignUpAsPatient from "./SignUpAsPatient";
-    import SignUpAsPsychotherapist from "./SignUpAsPsychotherapist";
+    import SignUpAsTherapist from "./SignUpAsTherapist";
+    import SignUpAsClient from "./SignUpAsClient";
 
     export default {
-        components: {SignUpAsPsychotherapist, SignUpAsPatient, Logo},
+        components: {SignUpAsClient, SignUpAsTherapist, Logo},
         data() {
             return {
                 tab: 0

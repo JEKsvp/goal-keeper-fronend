@@ -1,5 +1,5 @@
 <template>
-    <v-form ref="registrationAsPsychotherapistForm">
+    <v-form ref="registrationAsTherapistForm">
         <v-row>
             <v-col offset="1"
                    cols="10"
@@ -117,7 +117,7 @@
     import Btn from "../util/Btn";
 
     export default {
-        name: "SignUpAsPsychotherapist",
+        name: "SignUpAsTherapist",
         components: {Btn},
         mixins: [SignUpMixin],
         data() {
@@ -127,7 +127,7 @@
                     username: '',
                     email: '',
                     password: '',
-                    role: Roles.PSYCHOTHERAPIST,
+                    role: Roles.THERAPIST,
                     firstName: '',
                     lastName: '',
                     aboutMe: ''
@@ -155,7 +155,7 @@
                 ];
                 for (let valid of validations) {
                     if (valid !== true) {
-                        this.$refs.registrationAsPsychotherapistForm.validate();
+                        this.$refs.registrationAsTherapistForm.validate();
                         return false;
                     }
                 }

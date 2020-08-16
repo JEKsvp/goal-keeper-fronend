@@ -4,8 +4,8 @@
             <v-main>
                 <router-view></router-view>
             </v-main>
-            <patient-bottom-navigation v-if="isPatient"></patient-bottom-navigation>
-            <psychotherapist-bottom-navigation v-if="isPsychotherapist"></psychotherapist-bottom-navigation>
+            <client-bottom-navigation v-if="isClient"></client-bottom-navigation>
+            <therapist-bottom-navigation v-if="isTherapist"></therapist-bottom-navigation>
         </template>
         <template v-else>
             <v-skeleton-loader height="100%" type="card">
@@ -17,13 +17,13 @@
 <script>
 
     import UserService from '../../service/UserService'
-    import PatientBottomNavigation from "./PatientBottomNavigation";
+    import ClientBottomNavigation from "./ClientBottomNavigation";
     import Roles from "../../util/Roles";
-    import PsychotherapistBottomNavigation from "./PsychotherapistBottomNavigation";
+    import TherapistBottomNavigation from "./TherapistBottomNavigation";
 
     export default {
         name: 'main-page',
-        components: {PsychotherapistBottomNavigation, PatientBottomNavigation},
+        components: {TherapistBottomNavigation, ClientBottomNavigation},
         data() {
             return {
                 currentUser: null,
@@ -49,12 +49,12 @@
         },
 
         computed: {
-            isPatient() {
-                return this.currentUser.roles.includes(Roles.PATIENT)
+            isClient() {
+                return this.currentUser.roles.includes(Roles.CLIENT)
             },
 
-            isPsychotherapist() {
-                return this.currentUser.roles.includes(Roles.PSYCHOTHERAPIST)
+            isTherapist() {
+                return this.currentUser.roles.includes(Roles.THERAPIST)
             }
         },
 
@@ -65,11 +65,10 @@
             },
 
             redirectToMainPage() {
-                if (this.isPatient) {
+                if (this.isClient) {
                     this.$router.push({name: "Diary", params: {username: this.currentUser.username}})
                 } else {
                     this.$router.push({name: "User", params: {username: this.currentUser.username}})
-
                 }
             }
         }
