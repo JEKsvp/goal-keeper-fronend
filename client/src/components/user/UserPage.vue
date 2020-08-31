@@ -1,6 +1,6 @@
 <template>
     <v-card flat>
-        <toolbar title="Профиль"></toolbar>
+        <profile-toolbar title="Профиль"></profile-toolbar>
         <v-container>
             <v-skeleton-loader v-if="isLoading"
                                type="list-item-three-line">
@@ -33,10 +33,11 @@
     import LogoutService from "../../service/LogoutService";
     import Btn from "../util/Btn";
     import Roles from "../../util/Roles";
+    import ProfileToolbar from "../util/ProfileToolbar";
 
     export default {
         name: 'user-page',
-        components: {Btn, Toolbar},
+        components: {ProfileToolbar, Btn, Toolbar},
         data() {
             return {
                 user: {},

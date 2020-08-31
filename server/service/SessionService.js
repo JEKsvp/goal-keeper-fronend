@@ -5,9 +5,10 @@ const SESSION_COOKIE_NAME = "SESSIONID"
 const SessionService = {
 
     SESSION_NOT_FOUND: {message: "Session not found"},
+    SESSION_TTL: 60 * 60 * 24 * 21,
 
     setSession: function (res, sessionId) {
-        res.cookie(SESSION_COOKIE_NAME, sessionId)
+        res.cookie(SESSION_COOKIE_NAME, sessionId, {maxAge: this.SESSION_TTL, httpOnly: true})
     },
 
     extractSessionId: function (req) {

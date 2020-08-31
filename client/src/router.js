@@ -10,6 +10,8 @@ import CreateNote from "./components/diary/CreateNote";
 import Note from "./components/diary/Note";
 import Contacts from "./components/contacts/Contacts";
 import AboutUs from "./components/aboutus/AboutUs";
+import TherapistSearchPage from "./components/terapists/TherapistSearchPage";
+import TherapistPage from "./components/terapists/TherapistPage";
 
 
 export default new VueRouter({
@@ -24,6 +26,8 @@ export default new VueRouter({
                     {path: '/home/users/:username/diary/', name: 'Diary', component: Diary},
                     {path: '/home/users/:username/diary/notes/create', name: 'CreateNote', component: CreateNote},
                     {path: '/home/users/:username/diary/notes/:noteId', name: 'Note', component: Note},
+                    {path: '/home/therapists', name: 'TherapistSearchPage', component: TherapistSearchPage},
+                    {path: '/home/therapists/:username', name: 'TherapistPage', component: TherapistPage},
                 ],
         },
         {path: '/signup', name: 'SignUp', component: Register},

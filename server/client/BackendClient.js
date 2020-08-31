@@ -21,7 +21,6 @@ async function sendRequestInternal(req, res) {
         url: `${backendUrl}${req.url}`,
         data: req.body,
         method: req.method,
-        params: req.query,
         headers: req.headers
     });
     res.status(proxyResp.status).send(proxyResp.data)

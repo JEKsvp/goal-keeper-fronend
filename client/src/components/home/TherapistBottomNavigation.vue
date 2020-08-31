@@ -1,7 +1,7 @@
 <template>
     <v-bottom-navigation app>
         <v-btn :to="`/home/users/${getCurrentUser.username}`">
-            <span>Profile</span>
+            <span>Профиль</span>
             <v-icon>mdi-account</v-icon>
         </v-btn>
     </v-bottom-navigation>
