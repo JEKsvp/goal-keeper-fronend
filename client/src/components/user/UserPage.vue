@@ -5,18 +5,14 @@
             <v-skeleton-loader v-if="isLoading"
                                type="list-item-three-line">
             </v-skeleton-loader>
-            <v-card tile v-if="!isLoading">
-                <v-card-text>
-                    <p>Имя пользователя: {{user.username}}</p>
-                    <p>E-mail: {{user.email}}</p>
-                    <div v-if="isTherapist">
-                        <p>Имя: {{user.firstName}}</p>
-                        <p>Фамилия: {{user.lastName}}</p>
-                        <p>Обо мне: {{user.aboutMe}}</p>
-                    </div>
-                </v-card-text>
-            </v-card>
 
+            <therapist-user-page v-if="!isLoading && isTherapist"
+                                 :user="user">
+            </therapist-user-page>
+            <client-user-page v-if="!isLoading && !isTherapist"
+                              :is-loading="isLoading"
+                              :user="user"
+            ></client-user-page>
             <v-row>
                 <v-col class="text-center mt-5">
                     <btn type="cancel" @click="logout">Выход</btn>
@@ -34,10 +30,12 @@
     import Btn from "../util/Btn";
     import Roles from "../../util/Roles";
     import ProfileToolbar from "../util/ProfileToolbar";
+    import ClientUserPage from "./ClientUserPage";
+    import TherapistUserPage from "./TherapistUserPage";
 
     export default {
         name: 'user-page',
-        components: {ProfileToolbar, Btn, Toolbar},
+        components: {TherapistUserPage, ClientUserPage, ProfileToolbar, Btn, Toolbar},
         data() {
             return {
                 user: {},

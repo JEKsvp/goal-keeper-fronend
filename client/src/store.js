@@ -5,11 +5,16 @@ Vue.use(Vuex);
 
 const Store = new Vuex.Store({
     state: {
-        currentUser: null
+        currentUser: null,
+        accesses: []
     },
     mutations: {
         setCurrentUser(state, user) {
             state.currentUser = user;
+        },
+
+        setAccesses(state, accesses) {
+            state.accesses = accesses;
         }
     }
 });

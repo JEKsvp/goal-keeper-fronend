@@ -20,6 +20,7 @@
     import ClientBottomNavigation from "./ClientBottomNavigation";
     import Roles from "../../util/Roles";
     import TherapistBottomNavigation from "./TherapistBottomNavigation";
+    import AccessService from "../../service/access/AccessService";
 
     export default {
         name: 'main-page',
@@ -35,6 +36,7 @@
             try {
                 this.isLoading = true;
                 await this.loadCurrentUser();
+                await this.loadCurrentUserAccesses();
                 if (this.$route.name === 'Home') {
                     this.redirectToMainPage();
                 }
@@ -62,6 +64,11 @@
             async loadCurrentUser() {
                 this.currentUser = await UserService.getCurrentUser();
                 this.$store.commit('setCurrentUser', this.currentUser);
+            },
+
+            async loadCurrentUserAccesses() {
+                this.accesses = await AccessService.getCurrentUserAccesses();
+                this.$store.commit('setAccesses', this.accesses);
             },
 
             redirectToMainPage() {

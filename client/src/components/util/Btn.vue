@@ -9,6 +9,7 @@
            :x-small="xSmall"
            :loading="loading"
            :small="small"
+           :disabled="disabled"
            :elevation="elevation"
            :outlined="getOutlined">
         <slot></slot>
@@ -61,6 +62,10 @@
                 default: false
             },
             loading: {
+                type: Boolean,
+                default: false
+            },
+            disabled: {
                 type: Boolean,
                 default: false
             },

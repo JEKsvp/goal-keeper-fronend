@@ -38,6 +38,7 @@
             };
         },
         async created() {
+            Promise.all()
             try {
                 this.isLoading = true;
                 await UserService.getCurrentUser();
