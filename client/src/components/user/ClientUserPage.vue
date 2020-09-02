@@ -14,7 +14,20 @@
         </v-skeleton-loader>
         <v-card v-else class="mt-5 pt-5" tile>
             <v-card-title>
-                <p>Moй терапевт</p>
+                <p class="mb-0 pb-0">Moй терапевт</p>
+                <v-chip v-if="getAccessStatus === 'PENDING'"
+                        class="ml-5"
+                        outlined
+                        small>
+                    Ожидание ответа
+                </v-chip>
+                <v-chip v-if="getAccessStatus === 'ACCEPT'"
+                        class="ml-5"
+                        dark
+                        color="#006064"
+                        x-small>
+                    <v-icon small>mdi-check</v-icon>
+                </v-chip>
             </v-card-title>
             <v-divider></v-divider>
             <v-skeleton-loader v-if="isRequestSending"
@@ -79,6 +92,15 @@
 
         async created() {
             await this.loadTherapist();
+        },
+
+        computed: {
+            getAccessStatus() {
+                const accesses = this.$store.state.accesses
+                if (accesses.length > 0) {
+                    return accesses[0].status;
+                }
+            },
         },
 
         methods: {
