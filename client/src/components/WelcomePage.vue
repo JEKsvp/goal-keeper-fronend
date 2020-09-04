@@ -14,7 +14,7 @@
             <div class="text-center text-subtitle-1">или</div>
             <v-row mt-0 pt-0>
                 <v-col class="text-center">
-                    <btn large type="primary" to="/signin">Вход</btn>
+                    <btn large type="primary" dark to="/signin">Вход</btn>
                 </v-col>
             </v-row>
         </template>
@@ -38,7 +38,6 @@
             };
         },
         async created() {
-            Promise.all()
             try {
                 this.isLoading = true;
                 await UserService.getCurrentUser();

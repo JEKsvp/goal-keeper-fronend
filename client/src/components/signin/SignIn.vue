@@ -28,7 +28,7 @@
             </v-row>
             <v-row>
                 <v-col pb-0 mb-0 class="text-center">
-                    <btn @click="doLogin" type="primary">Войти</btn>
+                    <btn @click="doLogin" dark type="primary">Войти</btn>
                 </v-col>
             </v-row>
             <v-row>

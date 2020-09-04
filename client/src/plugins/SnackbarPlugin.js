@@ -2,12 +2,13 @@ import Colors from "../util/Colors";
 
 export default {
     install(Vue) {
-        Vue.prototype.$showSnackbar = function (type, text) {
+        Vue.prototype.$showSnackbar = function (type, text, timeout = 3000) {
             const snackbarComponent = findSnackbarPlugin(this)
 
             snackbarComponent.$data.show = true;
             snackbarComponent.$data.color = types.get(type) || '';
             snackbarComponent.$data.text = text || '';
+            snackbarComponent.$data.timeout = timeout
         };
     },
 };

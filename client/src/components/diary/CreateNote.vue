@@ -149,7 +149,12 @@
                                         </btn>
                                     </v-col>
                                     <v-col class="text-right ma-0 pa-0">
-                                        <btn type="primary" small fab elevation="0" @click="createNote">
+                                        <btn type="primary"
+                                             small
+                                             fab
+                                             dark
+                                             elevation="0"
+                                             @click="createNote">
                                             <v-icon small>mdi-content-save</v-icon>
                                         </btn>
                                     </v-col>

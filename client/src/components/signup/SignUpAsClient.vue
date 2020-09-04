@@ -62,7 +62,7 @@
                    cols="10"
                    class="text-center mb-0 pb-0">
                 <v-col>
-                    <btn type="primary" @click="doRegistration">Зарегистрироваться</btn>
+                    <btn type="primary" dark @click="doRegistration">Зарегистрироваться</btn>
                 </v-col>
             </v-col>
         </v-row>

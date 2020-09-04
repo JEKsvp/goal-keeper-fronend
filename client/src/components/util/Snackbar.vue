@@ -2,7 +2,7 @@
     <v-snackbar top
                 v-model="show"
                 :color="color"
-                :timeout="3000">
+                :timeout="timeout">
         <v-container class="ma-0 pa-0">
             <v-row class="pa-0 ma-0">
                 <v-col class="text-center pa-0 ma-0">
@@ -22,7 +22,8 @@
             return {
                 show: false,
                 color: '',
-                text: ''
+                text: '',
+                timeout: 3000
             }
         },
     }

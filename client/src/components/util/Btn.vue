@@ -1,6 +1,7 @@
 <template>
     <v-btn @click="click"
            :dark="dark"
+           :light="light"
            :color="getColor"
            :large="large"
            :to="to"
@@ -31,6 +32,10 @@
         name: "Btn",
         props: {
             dark: {
+                type: Boolean,
+                default: false
+            },
+            light: {
                 type: Boolean,
                 default: true
             },

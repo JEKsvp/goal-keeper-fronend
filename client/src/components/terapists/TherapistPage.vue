@@ -13,15 +13,22 @@
                 <v-card-text>
                     <p>{{therapist.aboutMe}}</p>
                 </v-card-text>
-                <v-divider></v-divider>
-                <v-card-actions>
+                <v-divider v-if="isClient"></v-divider>
+                <v-card-actions v-if="isClient">
                     <v-row class="pa-0 ma-0">
                         <v-col class="pa-0 ma-0 text-right">
-                            <btn type="secondary"
+                            <btn v-if="!clientAlreadyHasTherapist"
+                                 type="secondary"
+                                 @click="sendAccessRequest"
+                                 :loading="isRequestSending">
+                                Стать клиентом
+                            </btn>
+                            <btn v-if="clientAlreadyHasTherapist" type="secondary"
                                  @click="sendAccessRequest"
                                  :loading="isRequestSending"
-                                 :disabled="false">
-                                Стать клиентом
+                                 light
+                                 :disabled="true">
+                                У вас уже есть терапевт
                             </btn>
                         </v-col>
                     </v-row>
@@ -38,6 +45,7 @@
     import AccessService from "../../service/access/AccessService";
     import AccessStatuses from "../../service/access/AccessStatuses";
     import Btn from "../util/Btn";
+    import Roles from "../../util/Roles";
 
     export default {
         name: "TherapistPage",
@@ -61,6 +69,21 @@
             }
         },
 
+        computed: {
+            isClient() {
+                return this.$store.state.currentUser.roles.includes(Roles.CLIENT)
+            },
+
+            isTherapist() {
+                return this.$store.state.currentUser.roles.includes(Roles.THERAPIST)
+            },
+
+            clientAlreadyHasTherapist() {
+                const accesses = this.$store.state.accesses
+                return accesses.length > 0
+            },
+        },
+
         methods: {
             async sendAccessRequest() {
                 try {
@@ -69,7 +92,7 @@
                         username: this.therapist.username,
                         status: AccessStatuses.PENDING
                     })
-                    this.$showSnackbar("success", "Запрос успешно отправлен")
+                    this.$showSnackbar("success", "Запрос успешно отправлен. Статус можно посмотреть на странице вашего профиля", 7000)
                 } catch (e) {
                     this.$showSnackbar("error", "Ошибка отправки запроса")
                 }
