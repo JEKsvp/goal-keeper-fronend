@@ -14,7 +14,7 @@
 
 <script>
     export default {
-        name: "TherapistUserPage",
+        name: "TherapistProfilePage",
         props: {
             user: {
                 type: Object

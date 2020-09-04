@@ -40,12 +40,12 @@
 
 <script>
 
-    import Toolbar from "../util/Toolbar";
-    import TherapistService from "../../service/TherapistService";
-    import AccessService from "../../service/access/AccessService";
-    import AccessStatuses from "../../service/access/AccessStatuses";
-    import Btn from "../util/Btn";
-    import Roles from "../../util/Roles";
+    import Toolbar from "../../util/Toolbar";
+    import TherapistService from "../../../service/TherapistService";
+    import AccessService from "../../../service/access/AccessService";
+    import AccessStatuses from "../../../service/access/AccessStatuses";
+    import Btn from "../../util/Btn";
+    import Roles from "../../../util/Roles";
 
     export default {
         name: "TherapistPage",

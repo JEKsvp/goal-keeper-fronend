@@ -38,7 +38,7 @@
                     <v-row class="pa-0 ma-0">
                         <v-col class="pa-0 ma-0">
                             <v-list-item class="pa-0 ma-0"
-                                         :to="`/home/therapists/${therapist.username}`">
+                                         :to="`/client/therapists/${therapist.username}`">
                                 {{therapist.firstName}} {{therapist.lastName}}
                             </v-list-item>
                         </v-col>
@@ -56,7 +56,7 @@
                     <v-col cols="8" class="pa-0 ma-0">У вас пока нет терапевта.</v-col>
                     <v-col class="pa-0 ma-0 text-right">
                         <btn type="secondary"
-                             to="/home/therapists"
+                             to="/client/therapists"
                              small>найти
                         </btn>
                     </v-col>
@@ -68,13 +68,13 @@
 
 <script>
 
-    import TherapistService from "../../service/TherapistService";
-    import AccessService from "../../service/access/AccessService";
-    import AccessStatuses from "../../service/access/AccessStatuses";
-    import Btn from "../util/Btn";
+    import TherapistService from "../../../service/TherapistService";
+    import AccessService from "../../../service/access/AccessService";
+    import AccessStatuses from "../../../service/access/AccessStatuses";
+    import Btn from "../../util/Btn";
 
     export default {
-        name: "ClientUserPage",
+        name: "ClientProfilePage",
         components: {Btn},
         props: {
             user: {
@@ -96,10 +96,10 @@
 
         computed: {
             getAccessStatus() {
-                const accesses = this.$store.state.accesses
-                if (accesses.length > 0) {
-                    return accesses[0].status;
+                if (this.therapist) {
+                    return this.therapist.status
                 }
+                return null
             },
         },
 

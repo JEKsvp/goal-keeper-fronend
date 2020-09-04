@@ -32,19 +32,6 @@
                     <v-card-text>{{note.oppositeThoughts.description}}</v-card-text>
                 </v-card>
             </v-container>
-            <v-container>
-                <v-row>
-                    <v-col class="text-center">
-                        <approve-dialog text="Удалить запись?"
-                                        :accept-callback="deleteNote">
-                            <btn :loading="isDeleting"
-                                 type="cancel">
-                                <v-icon>mdi-delete</v-icon>
-                            </btn>
-                        </approve-dialog>
-                    </v-col>
-                </v-row>
-            </v-container>
         </v-container>
         <v-skeleton-loader v-else
                            type="card">
@@ -53,14 +40,13 @@
 </template>
 
 <script>
-    import Toolbar from "../util/Toolbar";
-    import NoteService from "../../service/NoteService";
-    import ApproveDialog from "../util/ApproveDialog";
-    import Btn from "../util/Btn";
+    import Toolbar from "../../util/Toolbar";
+    import NoteService from "../../../service/NoteService";
+    import Btn from "../../util/Btn";
 
     export default {
-        name: "Note",
-        components: {Btn, ApproveDialog, Toolbar},
+        name: "NoteAsTherapist",
+        components: {Btn, Toolbar},
         data: () => ({
             note: {},
             isLoading: false,
@@ -88,17 +74,6 @@
 
         methods: {
 
-            async deleteNote() {
-                try {
-                    this.isDeleting = true;
-                    await NoteService.deleteNote(this.username, this.noteId);
-                    this.isDeleting = false;
-                    this.$showSnackbar("success", "Запись успешно удалена")
-                    await this.$router.push({name: "Diary", params: {username: this.username}})
-                } catch (e) {
-                    this.$showSnackbar("error", "Ошибка удаления записи")
-                }
-            }
         }
     }
 </script>

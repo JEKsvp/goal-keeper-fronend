@@ -169,10 +169,10 @@
 </template>
 
 <script>
-    import Toolbar from "../util/Toolbar";
-    import NoteService from "../../service/NoteService";
-    import ValidationService from "../../service/ValidationService";
-    import Btn from "../util/Btn";
+    import Toolbar from "../../util/Toolbar";
+    import NoteService from "../../../service/NoteService";
+    import ValidationService from "../../../service/ValidationService";
+    import Btn from "../../util/Btn";
 
     export default {
         name: "CreateNote",
@@ -200,7 +200,7 @@
 
         computed: {
             username() {
-                return this.$route.params.username;
+                return this.$store.state.currentUser.username
             }
         },
 
@@ -213,8 +213,8 @@
                     return;
                 }
                 try {
-                    await NoteService.createNote(this.username, this.createNoteRequest);
-                    this.$router.push(`/home/users/${this.username}/diary/`)
+                    let note = await NoteService.createNote(this.username, this.createNoteRequest);
+                    await this.$router.push({name: 'ClientNote', params: {noteId: note.id}})
                 } catch (e) {
                     this.$showSnackbar('error', "Ошибка сохранения записи")
                 }

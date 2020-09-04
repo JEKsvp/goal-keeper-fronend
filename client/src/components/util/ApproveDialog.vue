@@ -16,6 +16,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <btn type="primary"
+                     dark
                      @click="cancel">
                     Отмена
                 </btn>

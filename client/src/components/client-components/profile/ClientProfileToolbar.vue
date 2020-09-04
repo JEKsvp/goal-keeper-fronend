@@ -22,7 +22,7 @@
             </template>
 
             <v-list>
-                <v-list-item to="/home/therapists">
+                <v-list-item to="/client/therapists">
                     <v-list-item-icon>
                         <v-icon>mdi-account-multiple</v-icon>
                     </v-list-item-icon>
@@ -37,10 +37,10 @@
 </template>
 
 <script>
-    import Colors from "../../util/Colors";
+    import Colors from "../../../util/Colors";
 
     export default {
-        name: "ProfileToolbar",
+        name: "ClientProfileToolbar",
         props: {
             title: {
                 type: String,

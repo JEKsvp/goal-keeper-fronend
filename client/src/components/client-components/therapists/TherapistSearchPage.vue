@@ -17,7 +17,7 @@
             </v-row>
             <v-list>
                 <template v-if="therapists.length > 0" v-for="therapist in therapists">
-                    <v-list-item :key="therapist.username" :to="`/home/therapists/${therapist.username}`">
+                    <v-list-item :key="therapist.username" :to="`/client/therapists/${therapist.username}`">
                         <v-list-item-content>{{therapist.firstName}} {{therapist.lastName}}</v-list-item-content>
                     </v-list-item>
                     <v-divider :key="therapist.username + 'divider'"></v-divider>
@@ -39,9 +39,9 @@
 </template>
 
 <script>
-    import Toolbar from "../util/Toolbar";
-    import TherapistService from "../../service/TherapistService";
-    import AutocompleteSearchExecutor from "../../util/AutocompleteSearchExecutor";
+    import Toolbar from "../../util/Toolbar";
+    import TherapistService from "../../../service/TherapistService";
+    import AutocompleteSearchExecutor from "../../../util/AutocompleteSearchExecutor";
 
     export default {
         name: "TherapistSearchPage",

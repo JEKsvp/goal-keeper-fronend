@@ -1,18 +1,13 @@
 <template>
     <v-card flat>
-        <profile-toolbar title="Профиль"></profile-toolbar>
+        <profile-toolbar title="Мой профиль"></profile-toolbar>
         <v-container>
             <v-skeleton-loader v-if="isLoading"
                                type="list-item-three-line">
             </v-skeleton-loader>
-
-            <therapist-user-page v-if="!isLoading && isTherapist"
+            <client-profile-page v-if="!isLoading"
                                  :user="user">
-            </therapist-user-page>
-            <client-user-page v-if="!isLoading && !isTherapist"
-                              :is-loading="isLoading"
-                              :user="user"
-            ></client-user-page>
+            </client-profile-page>
             <v-row>
                 <v-col class="text-center mt-5">
                     <btn type="cancel" @click="logout">Выход</btn>
@@ -24,18 +19,16 @@
 
 <script>
 
-    import UserService from '../../service/UserService'
-    import Toolbar from "../util/Toolbar";
-    import LogoutService from "../../service/LogoutService";
-    import Btn from "../util/Btn";
-    import Roles from "../../util/Roles";
-    import ProfileToolbar from "../util/ProfileToolbar";
-    import ClientUserPage from "./ClientUserPage";
-    import TherapistUserPage from "./TherapistUserPage";
+    import UserService from '../../../service/UserService'
+    import Toolbar from "../../util/Toolbar";
+    import LogoutService from "../../../service/LogoutService";
+    import Btn from "../../util/Btn";
+    import ProfileToolbar from "./ClientProfileToolbar";
+    import ClientProfilePage from "./ClientProfilePage";
 
     export default {
         name: 'user-page',
-        components: {TherapistUserPage, ClientUserPage, ProfileToolbar, Btn, Toolbar},
+        components: {ClientProfilePage, ProfileToolbar, Btn, Toolbar},
         data() {
             return {
                 user: {},
@@ -43,19 +36,13 @@
             }
         },
         async created() {
-            let username = this.$route.params.username;
+            let username = this.$store.state.currentUser.username;
             try {
                 this.isLoading = true;
                 this.user = await UserService.getUser(username);
                 this.isLoading = false;
             } catch (e) {
                 this.$showSnackbar("error", "Ошибка загрузки пользователя.")
-            }
-        },
-
-        computed: {
-            isTherapist() {
-                return this.user.roles.includes(Roles.THERAPIST)
             }
         },
 

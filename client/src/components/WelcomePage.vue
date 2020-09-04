@@ -27,6 +27,7 @@
     import Btn from "./util/Btn";
     import UserService from "../service/UserService";
     import BpdFooter from "./util/BpdFooter";
+    import Roles from "../util/Roles";
 
     export default {
         name: "WelcomePage",
@@ -40,8 +41,12 @@
         async created() {
             try {
                 this.isLoading = true;
-                await UserService.getCurrentUser();
-                await this.$router.push({name: "Home"})
+                const user = await UserService.getCurrentUser();
+                if (user.roles.includes(Roles.CLIENT)) {
+                    await this.$router.push({name: "ClientHome"})
+                } else {
+                    await this.$router.push({name: "TherapistHome"})
+                }
             } catch (e) {
                 console.debug('User unauthorized')
             } finally {
