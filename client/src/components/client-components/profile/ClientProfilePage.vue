@@ -96,10 +96,10 @@
 
         computed: {
             getAccessStatus() {
-                if (this.therapist) {
-                    return this.therapist.status
+                const accesses = this.$store.state.accesses
+                if (accesses.length > 0) {
+                    return accesses[0].status;
                 }
-                return null
             },
         },
 
