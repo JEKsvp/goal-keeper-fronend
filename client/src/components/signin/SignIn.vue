@@ -67,7 +67,7 @@
             async doLogin() {
                 try {
                     await SignInService.login(this.loginForm);
-                    await this.$router.push('/home')
+                    await this.$router.push('/')
                 } catch (e) {
                     if (e.response.status === 400) {
                         this.$showSnackbar('error', 'Неправильное имя пользователя или пароль');
